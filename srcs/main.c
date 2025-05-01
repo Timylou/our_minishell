@@ -6,14 +6,14 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/01 08:27:06 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:04:55 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
-{
-	printbanner();
-	return (0);
-}
+// int	main(void)
+// {
+// 	printbanner();
+// 	return (0);
+// }

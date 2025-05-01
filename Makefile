@@ -6,23 +6,24 @@
 #    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/01 08:21:11 by brturcio         ###   ########.fr        #
+#    Updated: 2025/05/01 15:12:06 by brturcio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror -g
 
 
 DIR_SRCS		:= srcs
 DIR_OBJS		:= objs
 DIR_LIBFT		:= libft
 
-SRCS			:= $(wildcard $(DIR_SRCS)/*.c) \
-					$(wildcard $(DIR_SRCS)/builtins/*.c) \
-					# $(wildcard $(DIR_SRCS)/filename/*.c) \
-					# Add other folders below if needed (e.g., parser, utils, etc.) \
+SRCS			:= $(wildcard $(DIR_SRCS)/builtins/*.c)
+
+					# $(wildcard $(DIR_SRCS)/*.c)
+					# $(wildcard $(DIR_SRCS)/filename/*.c)
+					# Add other folders below if needed (e.g., parser, utils, etc.)
 					# SRCS := $(shell find $(DIR_SRCS) -type f -name "*.c")
 
 # Object files: convert each source file path into a corresponding .o path in objs/
@@ -65,16 +66,3 @@ fclean : clean
 re : fclean all
 
 .PHONY : all clean fclean re libft
-
-
-# Debug target: compiles the program with -g flag to enable debugging with gdb
-# Usage: run `make debug` to recompile everything with debugging information
-debug: CFLAGS += -g					# Add -g to the CFLAGS (enables debug symbols)
-debug: re							# Rebuild everything from scratch using fclean and all
-	@echo "🔍 Compiled with -g for debugging."
-
-# Example: when you run `make debug` \
-# 1. It performs `fclean` to remove all compiled files \
-# 2. Then it runs `make` and compiles the project with the `-g` flag \
-# 3. Now you can run `gdb` to debug the program
-
