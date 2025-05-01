@@ -1,12 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test_builtins.c                               :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 12:21:08 by brturcio          #+#    #+#             */
-/*   Updated: 2025/04/29 12:21:09 by brturcio         ###   ########.fr       */
+/*   Created: 2024/10/25 15:01:09 by brturcio          #+#    #+#             */
+/*   Updated: 2024/11/06 15:28:54 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+void	ft_putchar_fd(char c, int fd)
+{
+	if (fd >= 0)
+		write(fd, &c, 1);
+}
