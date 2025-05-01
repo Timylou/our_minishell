@@ -6,10 +6,15 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:21:08 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/01 08:31:30 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:54:10 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-
+int main(int ac, char **av)
+{
+	(void)ac;
+	echo_builtins(av + 1);
+	return (0);
+}
