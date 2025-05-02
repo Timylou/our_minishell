@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:47:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/01 13:40:17 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/02 12:26:37 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "libft.h"
-
-#include <stdio.h>
-
+# include "libft.h"
+# include "builtins.h"
+# include "structs.h"
+# include "exit_code.h"
+# include <stdio.h>
 
 # define BLACK	"\033[0;30m"
 # define RED	"\033[0;31m"
