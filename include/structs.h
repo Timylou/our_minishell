@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:03:15 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/02 12:11:57 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:07:15 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct s_cmd
 
 typedef struct s_env
 {
-	char			*var;
-	struct s_env	next;
-	struct s_env	prev;
+	char			*data;
+	struct s_env	*next;
+	struct s_env	*prev;
 }	t_env;
 
 typedef struct s_shell
@@ -36,6 +36,12 @@ typedef struct s_shell
 	int		exit_status;
 }	t_shell;
 
+/* * * *  *
+*  shell *
+* * * * * */
+
+t_shell *init_shell(char **env);
+
 /* * * * *
 *  env *
 * * * * */
@@ -44,5 +50,14 @@ void	ft_init_env(char **env, t_shell *shell);
 t_env	*ft_search_env(char *var, t_shell *shell);
 void	ft_append_env(char *data, t_shell *shell);
 void	ft_unset_env(t_env *to_delete, t_shell *shell);
+
+/* * * *  * 
+*  free *
+* * * * * */
+
+void		ft_free_array(char **array);
+void    ft_free_env(t_env *env);
+void	ft_error(char *msg, t_shell *shell);
+void    ft_free_shell(t_shell *shell);
 
 #endif

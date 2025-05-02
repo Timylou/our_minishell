@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/02 12:14:58 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:50:49 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,26 @@ static void	ft_print_prompt(t_shell *shell)
 	hostname = ft_search_env("NAME", shell);
 	pwd = ft_search_env("PWD", shell);
 	if (logname)
-		ft_printf("%s", logname->data);
+		ft_printf(HGRN"%s"RST, logname->data + 8);
 	if (hostname)
-		ft_printf("@%s", hostname->data);
+		ft_printf(CYAN"@%s"RST, hostname->data + 5);
 	if (logname || hostname)
 		write(1, ":", 1);
 	if (pwd)
-		ft_printf("%s", pwd->data);
-	write(1, "$", 1);
+		ft_printf(HMAG"%s"RST, pwd->data + 4);
+	write(1, "$ ", 2);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	*shell;
 
+	(void) argc;
+	(void) argv;
 	printbanner();
 	shell = init_shell(env);
-	while (shell)
-	{
-		ft_print_prompt(shell);
-	}
+	ft_print_prompt(shell);
+	get_next_line(STDIN_FILENO);
+	ft_free_shell(shell);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:47:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/02 12:26:37 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:51:04 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include "libft.h"
 # include "builtins.h"
 # include "structs.h"
-# include "exit_code.h"
+# include "exit_codes.h"
+# include <limits.h>
 # include <stdio.h>
+
+# define HGRN	"\e[0;92m"
+# define HMAG	"\e[0;95m"
 
 # define BLACK	"\033[0;30m"
 # define RED	"\033[0;31m"

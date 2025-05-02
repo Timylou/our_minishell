@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
+#    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/01 15:12:06 by brturcio         ###   ########.fr        #
+#    Updated: 2025/05/02 15:08:07 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ DIR_SRCS		:= srcs
 DIR_OBJS		:= objs
 DIR_LIBFT		:= libft
 
-SRCS			:= $(wildcard $(DIR_SRCS)/builtins/*.c)
-
-					# $(wildcard $(DIR_SRCS)/*.c)
-					# $(wildcard $(DIR_SRCS)/filename/*.c)
+SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
+					$(DIR_SRCS)/builtins/builtins.c $(DIR_SRCS)/builtins/echo.c	\
+					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/shell.c		\
+					
+					#$(wildcard $(DIR_SRCS)/builtins/*.c)
+					#$(wildcard $(DIR_SRCS)/*.c)
+					#$(wildcard $(DIR_SRCS)/structs/*.c)
 					# Add other folders below if needed (e.g., parser, utils, etc.)
 					# SRCS := $(shell find $(DIR_SRCS) -type f -name "*.c")
 
@@ -65,4 +68,7 @@ fclean : clean
 
 re : fclean all
 
+norm	:
+	@norminette $(SRCS)
+	
 .PHONY : all clean fclean re libft

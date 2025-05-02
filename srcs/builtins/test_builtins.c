@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   test_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:21:08 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/01 14:54:10 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/02 14:25:05 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int main(int ac, char **av)
+/*int main(int ac, char **av)
 {
 	(void)ac;
 	echo_builtins(av + 1);
 	return (0);
-}
+}*/

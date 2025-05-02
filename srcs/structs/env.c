@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 15:42:29 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/02 12:10:13 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:21:52 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_compare(char *var, t_env *current_env, int len)
 	char	*current_var;
 	int		i;
 
-	current_var = current_var->data;
+	current_var = current_env->data;
 	i = 0;
 	while (i < len)
 	{
@@ -41,16 +41,23 @@ t_env	*ft_search_env(char *var, t_shell *shell)
 	{
 		if (ft_compare(var, env, len))
 			return (env);
-		env->next;
+		env = env->next;
 	}
 	return (NULL);
 }
 
 void	ft_unset_env(t_env *to_delete, t_shell *shell)
 {
-	to_delete->prev->next = to_delete->next;
-	to_delete->next->prev = to_delete->prev;
-	free(to_delete->var);
+	if (!shell->env->next)
+		shell->env = NULL;
+	else
+	{
+		if (to_delete->prev)
+			to_delete->prev->next = to_delete->next;
+		if (to_delete->next)
+			to_delete->next->prev = to_delete->prev;
+	}
+	free(to_delete->data);
 	free(to_delete);
 }
 
@@ -61,15 +68,18 @@ void	ft_append_env(char *data, t_shell *shell)
 
 	if (!data)
 		ft_error("No data to append in env", shell);
-	env = shell->env;
 	var_env = malloc(sizeof(t_env));
 	if (!var_env)
 		ft_error("new env var malloc error", shell);
 	var_env->data = data;
 	var_env->next = NULL;
 	var_env->prev = NULL;
-	if (!env)
+	if (!shell->env)
+	{
 		shell->env = var_env;
+		return ;
+	}
+	env = shell->env;
 	while (env->next)
 		env = env->next;
 	var_env->prev = env;
