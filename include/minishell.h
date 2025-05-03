@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:47:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/02 15:51:04 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/03 10:36:54 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "builtins.h"
 # include "structs.h"
 # include "exit_codes.h"
+# include "parsing.h"
 # include <limits.h>
 # include <stdio.h>
 
@@ -32,8 +33,6 @@
 # define CYAN	"\033[0;36m"
 # define WHITE	"\033[0;37m"
 # define RST	"\033[0m"
-
-# define p(...) ft_printf(__VA_ARGS__)
 
 void	printbanner(void);
 

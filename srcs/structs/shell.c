@@ -6,15 +6,15 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:13:11 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/02 15:23:58 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/03 10:35:32 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell *init_shell(char **env)
+t_shell	*init_shell(char **env)
 {
-	t_shell *shell;
+	t_shell	*shell;
 
 	shell = malloc(sizeof(t_shell));
 	if (!shell)

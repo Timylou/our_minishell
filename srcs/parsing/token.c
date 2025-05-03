@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 10:18:42 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/03 10:23:54 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/05/03 10:18:43 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/05/03 10:36:45 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
+t_token	*ft_tokeniser(char *line, t_shell *shell)
+{
+	t_token	*token;
 
-int	echo_builtins(char **cmd);
-
-#endif
+	token = malloc(sizeof(t_token));
+	if (!token)
+		ft_error("token malloc error", shell);
+}

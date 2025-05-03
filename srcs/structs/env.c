@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 15:42:29 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/02 15:21:52 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/03 10:34:59 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	ft_init_env(char **env, t_shell *shell)
 			ft_error("Cannot get the path", shell);
 		ft_append_env(ft_strjoin("PATH=", path), shell);
 		return ;
-
 	}
 	i = 0;
 	while (env[i])

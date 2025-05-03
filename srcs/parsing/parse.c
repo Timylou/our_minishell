@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 10:18:42 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/03 10:23:54 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/05/02 22:47:10 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/05/03 10:35:46 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
+void	ft_parse(char *line, t_shell *shell)
+{
+	t_token	*token;
 
-int	echo_builtins(char **cmd);
-
-#endif
+	token = ft_tokeniser(line, shell);
+}

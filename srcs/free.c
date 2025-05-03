@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:45:12 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/02 15:11:12 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/03 10:34:17 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_free_array(char **array)
 {
 	int	i;
-	
+
 	if (!array)
 		return ;
 	while (array[i])
@@ -44,7 +44,7 @@ static void	ft_free_cmds(t_cmd *cmds)
 	}
 }
 
-void    ft_free_env(t_env *env)
+void	ft_free_env(t_env *env)
 {
 	t_env	*next_env;
 
@@ -66,7 +66,7 @@ void	ft_error(char *msg, t_shell *shell)
 	ft_free_shell(shell);
 }
 
-void    ft_free_shell(t_shell *shell)
+void	ft_free_shell(t_shell *shell)
 {
 	if (shell)
 	{
@@ -76,4 +76,4 @@ void    ft_free_shell(t_shell *shell)
 			ft_free_env(shell->env);
 		free(shell);
 	}
-} 
+}

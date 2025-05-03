@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
+#    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/11 20:21:32 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/01 08:20:36 by brturcio         ###   ########.fr        #
+#    Updated: 2025/05/02 22:32:04 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= libft.a
 CC		:= cc
-CFLAGS		:= -Wall -Wextra -Werror -Iinc
+CFLAGS		:= -Wall -Wextra -Werror -g -Iinc
 
 OBJDIR		:= obj
 SRCDIRS		:= libft ft_printf get_next_line
