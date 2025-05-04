@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_builtins.c                                    :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 12:21:08 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/04 12:54:24 by brturcio         ###   ########.fr       */
+/*   Created: 2025/05/04 13:52:59 by brturcio          #+#    #+#             */
+/*   Updated: 2025/05/04 14:48:10 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int main(int ac, char **av)
+int	ft_env_builtins(char **cmd)
 {
-	(void)ac;
-	ft_echo_builtins(av + 1);
-	return (0);
+	t_env	**data
+	int		i;
+
+	data = cmd;
+	while (data)
+	{
+
+
+	}
+
 }
