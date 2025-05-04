@@ -6,13 +6,13 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:40:32 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/01 15:15:20 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:29:40 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static int	is_newline(char *str)
+static int	ft_is_newline(char *str)
 {
 	int	i;
 
@@ -20,6 +20,8 @@ static int	is_newline(char *str)
 	if (str[i] != '-')
 		return (1);
 	i++;
+	if (str[i] == '\0')
+		return (1);
 	while (str[i])
 	{
 		if (str[i] != 'n')
@@ -29,7 +31,7 @@ static int	is_newline(char *str)
 	return (0);
 }
 
-int	echo_printf(char **cmd)
+static int	ft_echo_printf(char **cmd)
 {
 	int	i;
 
@@ -44,27 +46,22 @@ int	echo_printf(char **cmd)
 	return (0);
 }
 
-int	echo_builtins(char **cmd)
+int	ft_echo_builtins(char **cmd)
 {
 	int	i;
 	int	newline;
 
-	i = 0;
-	newline = 0;
+	i = 1;
+	newline = 1;
 	if (!*cmd || !cmd[0])
 		return (1);
-	while (cmd[i])
+	while (cmd[i] && !ft_is_newline(cmd[i]))
 	{
-		if (!is_newline(cmd[i]))
-			newline = 1;
+		newline = 0;
 		i++;
 	}
+	ft_echo_printf(cmd + i);
 	if (newline)
-		echo_printf(cmd + 2);
-	else
-	{
-		echo_printf(cmd + 1);
 		ft_putstr_fd("\n", 1);
-	}
 	return (0);
 }
