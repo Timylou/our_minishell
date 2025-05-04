@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:18:43 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 12:25:49 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:59:56 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ static t_token	*ft_add_token(char *line, int *i, t_token_type t, t_shell *shl)
 	if (!token)
 		ft_error("token malloc error", EXIT_MALLOC, shl);
 	token->type = t;
+	if (token->type == TOKEN_REDIR_IN || token->type == TOKEN_REDIR_OUT)
+		*i += 1;
+	if (token->type == TOKEN_HEREDOC || token->type == TOKEN_REDIR_APPEND)
+		*i += 2;
 	token->next = NULL;
 	token->value = ft_get_next_word(line, i);
 	if (!token->value)
@@ -71,6 +75,8 @@ static void	ft_switch_token(char *line, int *i, t_token **token, t_shell *shell)
 	}
 	else if (line[*i] == '<')
 		cur_token = ft_add_token(line, i, TOKEN_REDIR_IN, shell);
+	else if (line[*i] == '>')
+		cur_token = ft_add_token(line, i, TOKEN_REDIR_OUT, shell);
 	else
 		cur_token = ft_add_token(line, i, TOKEN_WORD, shell);
 	if (*token)

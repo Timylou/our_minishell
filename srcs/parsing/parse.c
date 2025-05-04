@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 22:47:10 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 12:39:31 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 17:09:51 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_cmd	*ft_init_cmd(void)
 	return (cmd);
 }
 
-static int	ft_manage_token(t_token **token, t_cmd *cmd)
+static int	ft_manage_token(t_token **token, t_cmd *cmd, t_shell *shell)
 {
 	int success;
 
@@ -37,7 +37,7 @@ static int	ft_manage_token(t_token **token, t_cmd *cmd)
 	else if ((*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_REDIR_APPEND)
 		ft_open_outfile((*token)->value, cmd, (*token)->type);
 	else if ((*token)->type == TOKEN_WORD)
-		success = ft_open_cmd(token, cmd);
+		success = ft_open_cmd(token, cmd, shell);
 	return (success);
 }
 
@@ -67,7 +67,7 @@ void	ft_parse(char *line, t_shell *shell)
 		ft_error("cmd malloc error", EXIT_MALLOC, shell);
 	while (token)
 	{
-		ft_manage_token(&token, cmd);
+		ft_manage_token(&token, cmd, shell);
 		if (token)
 			token = token->next;
 	}

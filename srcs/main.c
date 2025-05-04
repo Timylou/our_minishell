@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/04 12:41:04 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:47:47 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **env)
 	t_shell	*shell;
 	char	*line;
 
-	//(void) argc;
+	// (void) argc;
 	(void) argv;
 	printbanner();
 	shell = init_shell(env);
@@ -48,6 +48,8 @@ int	main(int argc, char **argv, char **env)
 		ft_parse(line, shell);
 		free(line);
 		ft_process(env, shell);
+		while (wait(NULL) != -1)
+		;
 		argc--;
 	}
 	ft_free_shell(shell);

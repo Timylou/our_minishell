@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:21:39 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 12:46:08 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:52:23 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_dup_files(t_cmd *cmd)
 {
-	if (cmd->in >= 0)
+	if (cmd->in >= 0 && cmd->in != STDIN_FILENO)
 	{
 		if (dup2(cmd->in, STDIN_FILENO) < 0)
 		{
@@ -25,7 +25,7 @@ static int	ft_dup_files(t_cmd *cmd)
 		}
 		close(cmd->in);
 	}
-	if (cmd->out >= 0)
+	if (cmd->out >= 0 && cmd->out != STDOUT_FILENO)
 	{
 		if (dup2(cmd->out, STDOUT_FILENO) < 0)
 		{
