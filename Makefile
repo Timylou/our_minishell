@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
+#    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-<<<<<<< Updated upstream
-#    Updated: 2025/05/04 15:06:11 by brturcio         ###   ########.fr        #
-=======
-#    Updated: 2025/05/04 14:56:09 by brturcio         ###   ########.fr        #
->>>>>>> Stashed changes
+#    Updated: 2025/05/04 11:35:11 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,17 +19,13 @@ DIR_SRCS		:= srcs
 DIR_OBJS		:= objs
 DIR_LIBFT		:= libft
 
-
 SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/builtins/builtins.c $(DIR_SRCS)/builtins/echo.c	\
 					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/shell.c		\
-<<<<<<< Updated upstream
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/cmd.c		\
 					$(DIR_SRCS)/exec/exec.c
-=======
->>>>>>> Stashed changes
-
+					
 					#$(wildcard $(DIR_SRCS)/builtins/*.c)
 					#$(wildcard $(DIR_SRCS)/*.c)
 					#$(wildcard $(DIR_SRCS)/structs/*.c)
@@ -81,5 +73,5 @@ re : fclean all
 
 norm	:
 	@norminette $(SRCS)
-
+	
 .PHONY : all clean fclean re libft

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:03:15 by yel-mens          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2025/05/04 15:06:22 by brturcio         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/04 14:16:45 by brturcio         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2025/05/04 12:47:48 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +24,7 @@ typedef struct s_cmd
 
 typedef struct s_env
 {
-	char			**data;
+	char			*data;
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
@@ -56,7 +52,7 @@ t_env	*ft_search_env(char *var, t_shell *shell);
 void	ft_append_env(char *data, t_shell *shell);
 void	ft_unset_env(t_env *to_delete, t_shell *shell);
 
-/* * * *  *
+/* * * *  * 
 *  free *
 * * * * * */
 
