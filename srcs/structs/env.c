@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 15:42:29 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/03 10:34:59 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/03 12:47:34 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	ft_append_env(char *data, t_shell *shell)
 	t_env	*var_env;
 
 	if (!data)
-		ft_error("No data to append in env", shell);
+		ft_error("No data to append in env", EXIT_SYNTAX_ERROR, shell);
 	var_env = malloc(sizeof(t_env));
 	if (!var_env)
-		ft_error("new env var malloc error", shell);
+		ft_error("new env var malloc error", EXIT_MALLOC, shell);
 	var_env->data = data;
 	var_env->next = NULL;
 	var_env->prev = NULL;
@@ -94,7 +94,7 @@ void	ft_init_env(char **env, t_shell *shell)
 	if (!env)
 	{
 		if (!getcwd(path, PATH_MAX))
-			ft_error("Cannot get the path", shell);
+			ft_error("Cannot get the path", EXIT_ENV, shell);
 		ft_append_env(ft_strjoin("PATH=", path), shell);
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:47:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/03 10:36:54 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 11:34:55 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include "exit_codes.h"
 # include "parsing.h"
 # include <limits.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
 # include <stdio.h>
 
 # define HGRN	"\e[0;92m"
@@ -35,5 +39,7 @@
 # define RST	"\033[0m"
 
 void	printbanner(void);
+
+void	ft_process(char **env, t_shell *shell);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/03 10:33:06 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:41:04 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,18 @@ int	main(int argc, char **argv, char **env)
 	t_shell	*shell;
 	char	*line;
 
-	(void) argc;
+	//(void) argc;
 	(void) argv;
 	printbanner();
 	shell = init_shell(env);
-	while (shell)
+	while (argc > 0)
 	{
 		ft_print_prompt(shell);
 		line = get_next_line(STDIN_FILENO);
 		ft_parse(line, shell);
 		free(line);
+		ft_process(env, shell);
+		argc--;
 	}
 	ft_free_shell(shell);
 	return (EXIT_SUCCESS);

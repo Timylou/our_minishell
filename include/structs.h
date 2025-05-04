@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:03:15 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/03 10:25:48 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:47:48 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_unset_env(t_env *to_delete, t_shell *shell);
 
 void	ft_free_array(char **array);
 void	ft_free_env(t_env *env);
-void	ft_error(char *msg, t_shell *shell);
+void	ft_error(char *msg, int exit_code, t_shell *shell);
 void	ft_free_shell(t_shell *shell);
 
 #endif
