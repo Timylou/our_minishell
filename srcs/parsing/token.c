@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:18:43 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 16:59:56 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:29:55 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@ static char	*ft_get_next_word(char *line, int *i)
 	int		j;
 	char	*word;
 
-	while (line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\n'
-		|| line[*i] == '\v' || line[*i] == '\f' || line[*i] == '\r')
-			*i += 1;
+	while (ft_isspace(line[*i]))
+		*i += 1;
 	begin_word = *i;
-	while (line[*i]
-		&& !(line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\n'
-		|| line[*i] == '\v' || line[*i] == '\f' || line[*i] == '\r'))
-			*i += 1;
+	while (line[*i] && !ft_isspace(line[*i]))
+		*i += 1;
 	end_word = (*i)++;
 	word = malloc(sizeof(char) * (end_word - begin_word) + 1);
 	if (!word)
@@ -60,6 +57,12 @@ static t_token	*ft_add_token(char *line, int *i, t_token_type t, t_shell *shl)
 		free(token);
 		ft_error("token value malloc error", EXIT_MALLOC, shl);
 	}
+	if (!token->value[0])
+	{
+		free(token->value);
+		free(token);
+		return (NULL);
+	}
 	return (token);
 }
 
@@ -69,12 +72,11 @@ static void	ft_switch_token(char *line, int *i, t_token **token, t_shell *shell)
 	t_token	*cur_token;
 
 	if (line[*i] == '<' && line[*i + 1] == '<')
-	{
-		*i += 1;
 		cur_token = ft_add_token(line, i, TOKEN_HEREDOC, shell);
-	}
 	else if (line[*i] == '<')
 		cur_token = ft_add_token(line, i, TOKEN_REDIR_IN, shell);
+	else if (line[*i] == '>' && line[*i + 1] == '>')
+		cur_token = ft_add_token(line, i, TOKEN_REDIR_APPEND, shell);
 	else if (line[*i] == '>')
 		cur_token = ft_add_token(line, i, TOKEN_REDIR_OUT, shell);
 	else
@@ -93,11 +95,15 @@ static void	ft_switch_token(char *line, int *i, t_token **token, t_shell *shell)
 t_token	*ft_tokeniser(char *line, t_shell *shell)
 {
 	t_token	*token;
+	int		len;
 	int		i;
 
 	token = NULL;
+	len = ft_strlen(line);
 	i = 0;
-	while (line[i])
+	while (i < len && ft_isspace(line[i]))
+		i++;
+	while (i < len)
 		ft_switch_token(line, &i, &token, shell);
 	return (token);
 }

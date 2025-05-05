@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:10:14 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 13:21:12 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:04:02 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ int		ft_open_cmd(t_token	**token, t_cmd *cmd, t_shell *shell);
 * * * * * * * */
 
 t_token	*ft_tokeniser(char *line, t_shell *shell);
+t_token	*ft_sort_token(t_token *token);
 
 /* * * * *
 * file *
 * * * * * */
 
-void	ft_open_infile(char *filename, t_cmd *cmd);
-void	ft_open_outfile(char *filename, t_cmd *cmd, t_token_type type);
+int		ft_open_infile(char *filename, t_cmd *cmd);
+int		ft_open_outfile(char *filename, t_cmd *cmd, t_token_type type);
 
 #endif

@@ -6,25 +6,37 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 23:15:55 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/03 23:30:50 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:04:12 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_open_infile(char *filename, t_cmd *cmd)
+int	ft_open_infile(char *filename, t_cmd *cmd)
 {
+	if (cmd->in > 0 && cmd->in != STDIN_FILENO)
+		close(cmd->in);
 	cmd->in = open(filename, O_RDONLY);
 	if (cmd->in < 0)
+	{
 		perror(filename);
+		return (0);
+	}
+	return (1);
 }
 
-void	ft_open_outfile(char *filename, t_cmd *cmd, t_token_type type)
+int	ft_open_outfile(char *filename, t_cmd *cmd, t_token_type type)
 {
+	if (cmd->out > 0 && cmd->out != STDOUT_FILENO)
+		close(cmd->out);
 	if (type == TOKEN_REDIR_OUT)
 		cmd->out = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else
 		cmd->out = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmd->out < 0)
+	{
 		perror(filename);
+		return (0);
+	}
+	return (1);
 }

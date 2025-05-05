@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/04 16:47:47 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:38:54 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,35 @@ static void	ft_print_prompt(t_shell *shell)
 	write(1, "$ ", 2);
 }
 
+// c'est normal que la fonction fais + de 25 lignes c'est temporaire
+// Pour arreter il faut faire Ctrl+D dans une ligne vide
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	*shell;
 	char	*line;
 
-	// (void) argc;
+	(void) argc;
 	(void) argv;
 	printbanner();
 	shell = init_shell(env);
-	while (argc > 0)
+	while (shell)
 	{
 		ft_print_prompt(shell);
 		line = get_next_line(STDIN_FILENO);
-		ft_parse(line, shell);
-		free(line);
-		ft_process(env, shell);
-		while (wait(NULL) != -1)
-		;
+		if (line)
+		{
+			ft_parse(line, shell);
+			free(line);
+			ft_process(env, shell);
+			while (wait(NULL) != -1)
+				;
+		}
+		else
+		{
+			ft_free_shell(shell);
+			printf(YELLOW"\nSEE YOU SOON !\n"RST);
+			exit(EXIT_SUCCESS);
+		}
 		argc--;
 	}
 	ft_free_shell(shell);

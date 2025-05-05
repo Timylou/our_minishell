@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 22:47:10 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 17:09:51 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:38:30 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ static t_cmd	*ft_init_cmd(void)
 
 static int	ft_manage_token(t_token **token, t_cmd *cmd, t_shell *shell)
 {
-	int success;
+	int	success;
 
 	success = 1;
 	if ((*token)->type == TOKEN_REDIR_IN)
-		ft_open_infile((*token)->value, cmd);
-	else if ((*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_REDIR_APPEND)
-		ft_open_outfile((*token)->value, cmd, (*token)->type);
+		success = ft_open_infile((*token)->value, cmd);
+	else if ((*token)->type == TOKEN_REDIR_OUT
+		|| (*token)->type == TOKEN_REDIR_APPEND)
+		success = ft_open_outfile((*token)->value, cmd, (*token)->type);
 	else if ((*token)->type == TOKEN_WORD)
 		success = ft_open_cmd(token, cmd, shell);
 	return (success);
@@ -61,13 +62,15 @@ void	ft_parse(char *line, t_shell *shell)
 	t_cmd	*cmd;
 
 	all_token = ft_tokeniser(line, shell);
-	token = all_token;
+	token = ft_sort_token(all_token);
+	all_token = token;
 	cmd = ft_init_cmd();
 	if (!cmd)
 		ft_error("cmd malloc error", EXIT_MALLOC, shell);
 	while (token)
 	{
-		ft_manage_token(&token, cmd, shell);
+		if (!ft_manage_token(&token, cmd, shell))
+			break ;
 		if (token)
 			token = token->next;
 	}

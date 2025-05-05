@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 10:56:04 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 17:10:46 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/04 21:05:02 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	ft_search_path(char *cmd_name, char **args, char **path)
 	return (0);
 }
 
-static void	ft_access(char **args, t_shell *shell)
+static char	**ft_access(char **args, t_shell *shell)
 {
 	int		i;
 	char	*cmd_name;
@@ -63,9 +63,9 @@ static void	ft_access(char **args, t_shell *shell)
 	path = ft_get_path(shell);
 	cmd_name = args[0];
 	if (ft_search_path(cmd_name, args, path))
-		return ;
+		return (args);
 	if (!access(cmd_name, X_OK))
-		return ;
+		return (args);
 	perror(cmd_name);
 	i = 0;
 	while (args[i])
@@ -76,6 +76,7 @@ static void	ft_access(char **args, t_shell *shell)
 	}
 	free(args);
 	args = NULL;
+	return (NULL);
 }
 
 static int	nb_word(t_token *token)
@@ -83,10 +84,11 @@ static int	nb_word(t_token *token)
 	int	i;
 
 	i = 0;
-	while (token && token->type == TOKEN_WORD)
+	while (token && token->type != TOKEN_PIPE)
 	{
+		if (token->type == TOKEN_WORD)
+			i++;
 		token = token->next;
-		i++;
 	}
 	return (i);
 }
@@ -106,15 +108,16 @@ int	ft_open_cmd(t_token	**token, t_cmd *cmd, t_shell *shell)
 	i = 0;
 	while (i < nb_args)
 	{
-		args[i] = ft_strdup((*token)->value);
-		if (!args[i])
-			success = 0;
-		i++;
+		if ((*token)->type == TOKEN_WORD)
+		{
+			args[i] = ft_strdup((*token)->value);
+			if (!args[i++])
+				success = 0;
+		}
 		if (i != nb_args)
 			*token = (*token)->next;
 	}
 	args[i] = NULL;
-	ft_access(args, shell);
-	cmd->args = args;
+	cmd->args = ft_access(args, shell);
 	return (success);
 }

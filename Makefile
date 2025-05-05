@@ -6,7 +6,7 @@
 #    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/04 11:35:11 by yel-mens         ###   ########.fr        #
+#    Updated: 2025/05/05 14:06:53 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/shell.c		\
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/cmd.c		\
+					$(DIR_SRCS)/parsing/sort_token.c							\
 					$(DIR_SRCS)/exec/exec.c
 					
 					#$(wildcard $(DIR_SRCS)/builtins/*.c)
@@ -72,6 +73,7 @@ fclean : clean
 re : fclean all
 
 norm	:
+	@norminette include/
 	@norminette $(SRCS)
 	
 .PHONY : all clean fclean re libft

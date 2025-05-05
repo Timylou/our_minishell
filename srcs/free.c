@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:45:12 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/04 12:31:05 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:36:37 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_free_array(char **array)
 	array = NULL;
 }
 
-static void	ft_free_cmds(t_cmd *cmds)
+void	ft_free_cmds(t_cmd *cmds)
 {
 	t_cmd	*next_cmd;
 
@@ -39,8 +39,10 @@ static void	ft_free_cmds(t_cmd *cmds)
 		next_cmd = cmds->next;
 		if (cmds->args)
 			ft_free_array(cmds->args);
-		close(cmds->in);
-		close(cmds->out);
+		if (cmds->in >= 0 && cmds->in != STDIN_FILENO)
+			close(cmds->in);
+		if (cmds->out >= 0 && cmds->out != STDOUT_FILENO)
+			close(cmds->out);
 		free(cmds);
 		cmds = next_cmd;
 	}

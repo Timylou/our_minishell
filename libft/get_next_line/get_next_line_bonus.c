@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 09:42:38 by brturcio          #+#    #+#             */
-/*   Updated: 2025/04/12 12:37:56 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:18:28 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = extract_line(&data[fd]);
+	free(data[fd]);
+	data[fd] = NULL;
 	return (line);
 }
