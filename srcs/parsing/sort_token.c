@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:52:59 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/05 17:39:45 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:57:06 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_place_token(t_token *token, t_token **tab_token, int tab_info[3])
 	tab_token[first] = token;
 }
 
-static void	ft_link_token(t_token **tab_token, int len)
+static void	ft_link_token(t_token **tab_token, int len, t_token *last_token)
 {
 	t_token	*cur_token;
 	int		i;
@@ -58,7 +58,7 @@ static void	ft_link_token(t_token **tab_token, int len)
 		cur_token->next = tab_token[++i];
 	}
 	cur_token = tab_token[i];
-	cur_token->next = NULL;
+	cur_token->next = last_token;
 }
 
 t_token	*ft_sort_token(t_token *token)
@@ -82,7 +82,9 @@ t_token	*ft_sort_token(t_token *token)
 		ft_place_token(token, tab_token, tab_info);
 		token = token->next;
 	}
-	ft_link_token(tab_token, tab_info[0]);
+	if (token && token->type == TOKEN_PIPE)
+		token->next = ft_sort_token(token->next);
+	ft_link_token(tab_token, tab_info[0], token);
 	token = tab_token[0];
 	free(tab_token);
 	return (token);

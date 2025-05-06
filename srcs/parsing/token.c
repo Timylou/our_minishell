@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:18:43 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/05 17:29:55 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:00:17 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ static t_token	*ft_add_token(char *line, int *i, t_token_type t, t_shell *shl)
 	return (token);
 }
 
+static t_token	*ft_add_token_pipe(int *i, t_shell *shell)
+{
+	t_token	*token;
+
+	token = malloc(sizeof(t_token));
+	if (!token)
+		ft_error("token malloc error", EXIT_MALLOC, shell);
+	token->type = TOKEN_PIPE;
+	token->next = NULL;
+	token->value = NULL;
+	*i += 1;
+	return (token);
+}
+
 static void	ft_switch_token(char *line, int *i, t_token **token, t_shell *shell)
 {
 	t_token	*aux_token;
@@ -79,6 +93,8 @@ static void	ft_switch_token(char *line, int *i, t_token **token, t_shell *shell)
 		cur_token = ft_add_token(line, i, TOKEN_REDIR_APPEND, shell);
 	else if (line[*i] == '>')
 		cur_token = ft_add_token(line, i, TOKEN_REDIR_OUT, shell);
+	else if (line[*i] == '|')
+		cur_token = ft_add_token_pipe(i, shell);
 	else
 		cur_token = ft_add_token(line, i, TOKEN_WORD, shell);
 	if (*token)
@@ -105,5 +121,6 @@ t_token	*ft_tokeniser(char *line, t_shell *shell)
 		i++;
 	while (i < len)
 		ft_switch_token(line, &i, &token, shell);
+	//add pipe dernier token
 	return (token);
 }

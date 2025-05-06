@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 23:15:55 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/05 17:04:12 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:40:24 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,19 @@ int	ft_open_outfile(char *filename, t_cmd *cmd, t_token_type type)
 		return (0);
 	}
 	return (1);
+}
+
+void	ft_open_pipe(t_cmd *cmd, t_shell *shell)
+{
+	t_cmd	*new_cmd;
+	int		end[2];
+
+	new_cmd = ft_init_cmd();
+	if (!new_cmd)
+		ft_error("malloc cmd error", EXIT_MALLOC, shell);
+	if (pipe(end) < 0)
+		ft_error("pipe error", EXIT_FD, shell);
+	cmd->out = end[1];
+	new_cmd->in = end[0];
+	cmd->next = new_cmd;
 }
