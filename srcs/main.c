@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/05 17:38:54 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:14:47 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_print_prompt(t_shell *shell)
 		write(1, ":", 1);
 	if (pwd)
 		ft_printf(HMAG"%s"RST, pwd->data + 4);
-	write(1, "$ ", 2);
+	write(1, "$\t", 2);
 }
 
 // c'est normal que la fonction fais + de 25 lignes c'est temporaire

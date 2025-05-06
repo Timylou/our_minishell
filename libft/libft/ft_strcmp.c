@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_path.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 14:12:28 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 15:37:58 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/05/06 15:00:18 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/05/06 15:52:30 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	ft_cd_path(char *arg, t_shell *shell)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*pwd;
+	int	i;
 
-	pwd = ft_get_val("PWD", shell);
-	if (access(arg, F_OK) == -1)
+	i = 0;
+	while ((s1[i] != '\0' || s2[i] != '\0'))
 	{
-		ft_putstr_fd("minishell: cd : No such file or directory", STDERR_FILENO);
-		free(pwd);
-		return(1);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

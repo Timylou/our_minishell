@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:21:39 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/05 16:47:43 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:54:53 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,17 @@ static int	ft_dup_files(t_cmd *cmd)
 	return (1);
 }
 
-static int	ft_exec(t_cmd *cmd, char **env)
+static int	ft_exec(t_cmd *cmd, char **env, t_shell *shell)
 {
 	if (!cmd->args)
 		return (0);
-	if (execve(cmd->args[0], cmd->args, env) < 0)
+	if (ft_is_builtin(cmd->args[0]))
+	{
+		ft_exec_builtins(cmd, shell);
+		ft_free_shell(shell);
+		exit(EXIT_SUCCESS);
+	}
+	else if (execve(cmd->args[0], cmd->args, env) < 0)
 		return (0);
 	return (1);
 }
@@ -78,7 +84,7 @@ static void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell)
 		ft_free_shell(shell);
 		return ;
 	}
-	if (!ft_exec(cmd, env))
+	if (!ft_exec(cmd, env, shell))
 	{
 		ft_free_shell(shell);
 		exit(EXIT_CANNOT_EXECUTE);

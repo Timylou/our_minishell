@@ -6,7 +6,7 @@
 #    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/05 14:06:53 by yel-mens         ###   ########.fr        #
+#    Updated: 2025/05/06 15:37:24 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ DIR_LIBFT		:= libft
 
 SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/builtins/builtins.c $(DIR_SRCS)/builtins/echo.c	\
+					$(DIR_SRCS)/builtins/env_utils.c $(DIR_SRCS)/builtins/env.c	\
+					$(DIR_SRCS)/builtins/pwd.c $(DIR_SRCS)/builtins/cd.c		\
+					$(DIR_SRCS)/builtins/cd_path.c								\
 					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/shell.c		\
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/cmd.c		\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:18:42 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 14:46:38 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:31:25 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "minishell.h"
 
 # define PATH_MAX 4096
+
+int		ft_is_builtin(char *arg);
+void	ft_exec_builtins(t_cmd *cmd, t_shell *shell);
 
 int		ft_echo_builtins(t_cmd *cmd);
 int		ft_pwd_builtins(t_cmd *cmd);
