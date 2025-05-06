@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   test_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 11:45:47 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/05 18:01:53 by brturcio         ###   ########.fr       */
+/*   Created: 2025/04/29 12:21:08 by brturcio          #+#    #+#             */
+/*   Updated: 2025/05/05 18:19:06 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd_builtins(t_cmd *cmd)
-{
-	char	*rute;
+// int main(int ac, char **av)
+// {
+// 	t_cmd	cmd;
 
-	(void)cmd;
-	rute = getcwd(NULL, 0);
-	if (!rute)
-	{
-		ft_putstr_fd("minishell: pwd: getcwd failed\n", STDERR_FILENO);
-		return(1);
-	}
-	ft_putstr_fd(rute, STDOUT_FILENO);
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	free(rute);
-	return (0);
-}
+// 	if (ac < 2)
+// 		return (1);
+// 	cmd.args = av + 1;
+// 	cmd.in = 0;
+// 	cmd.out = 1;
+// 	cmd.read_out = 0;
+// 	cmd.next = NULL;
+// 	ft_pwd_builtins(&cmd);
+// 	return (0);
+// }
+
+
+
+

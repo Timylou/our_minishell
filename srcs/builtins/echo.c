@@ -6,20 +6,19 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:40:32 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/04 12:29:40 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/05 10:02:58 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "minishell.h"
 
 static int	ft_is_newline(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (str[i] != '-')
+	if (str[0] != '-')
 		return (1);
-	i++;
+	i = 1;
 	if (str[i] == '\0')
 		return (1);
 	while (str[i])
@@ -31,36 +30,36 @@ static int	ft_is_newline(char *str)
 	return (0);
 }
 
-static int	ft_echo_printf(char **cmd)
+static int	ft_echo_printf(char **args)
 {
 	int	i;
 
 	i = 0;
-	while (cmd[i])
+	while (args[i])
 	{
-		ft_putstr_fd(cmd[i], 1);
-		if (cmd[i + 1])
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
 			ft_putstr_fd(" ", 1);
 		i++;
 	}
 	return (0);
 }
 
-int	ft_echo_builtins(char **cmd)
+int	ft_echo_builtins(t_cmd *cmd)
 {
 	int	i;
 	int	newline;
 
 	i = 1;
 	newline = 1;
-	if (!*cmd || !cmd[0])
+	if (!cmd || !cmd->args|| !cmd->args[0])
 		return (1);
-	while (cmd[i] && !ft_is_newline(cmd[i]))
+	while (cmd->args[i] && !ft_is_newline(cmd->args[i]))
 	{
 		newline = 0;
 		i++;
 	}
-	ft_echo_printf(cmd + i);
+	ft_echo_printf(cmd->args + i);
 	if (newline)
 		ft_putstr_fd("\n", 1);
 	return (0);
