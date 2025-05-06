@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:47:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/04 13:55:03 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:58:24 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 
 # define HGRN	"\e[0;92m"
 # define HMAG	"\e[0;95m"
