@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/06 15:37:24 by yel-mens         ###   ########.fr        #
+#    Updated: 2025/05/06 17:54:37 by brturcio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/cmd.c		\
 					$(DIR_SRCS)/parsing/sort_token.c							\
 					$(DIR_SRCS)/exec/exec.c
-					
+
 					#$(wildcard $(DIR_SRCS)/builtins/*.c)
 					#$(wildcard $(DIR_SRCS)/*.c)
 					#$(wildcard $(DIR_SRCS)/structs/*.c)
@@ -78,5 +78,5 @@ re : fclean all
 norm	:
 	@norminette include/
 	@norminette $(SRCS)
-	
+
 .PHONY : all clean fclean re libft
