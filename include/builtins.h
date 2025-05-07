@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:18:42 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 15:31:25 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:03:00 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define PATH_MAX 4096
 
 int		ft_is_builtin(char *arg);
+int		ft_is_builtin_no_fork(char *arg);
+int		ft_no_fork(t_cmd *cmd, t_shell *shell);
 void	ft_exec_builtins(t_cmd *cmd, t_shell *shell);
 
 int		ft_echo_builtins(t_cmd *cmd);

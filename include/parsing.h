@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:10:14 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/06 19:12:19 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 09:33:23 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_token
 * parser *
 * * * * * */
 
-t_cmd	*ft_parse(char *line, t_shell *shell);
+void	ft_parse(char *line, t_shell *shell);
 int		ft_open_cmd(t_token	**token, t_cmd *cmd, t_shell *shell);
 
 /* * * * * * *

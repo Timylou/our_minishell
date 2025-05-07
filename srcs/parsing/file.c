@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 23:15:55 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/06 18:40:24 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:13:17 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	ft_open_pipe(t_cmd *cmd, t_shell *shell)
 		ft_error("malloc cmd error", EXIT_MALLOC, shell);
 	if (pipe(end) < 0)
 		ft_error("pipe error", EXIT_FD, shell);
-	cmd->out = end[1];
+	if (cmd->out == STDOUT_FILENO)
+		cmd->out = end[1];
+	else
+		close(end[1]);
 	new_cmd->in = end[0];
 	cmd->next = new_cmd;
 }

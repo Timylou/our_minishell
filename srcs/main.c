@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 19:40:20 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 09:33:04 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv, char **env)
 		line = get_next_line(STDIN_FILENO);
 		if (line)
 		{
-			shell->cmds = ft_parse(line, shell);
+			ft_parse(line, shell);
 			free(line);
 			ft_process(env, shell);
 			while (wait(NULL) != -1)

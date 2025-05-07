@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:21:39 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/06 19:40:34 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:03:07 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,16 @@ void	ft_process(char **env, t_shell *shell)
 	cmd = shell->cmds;
 	while (cmd)
 	{
-		pid = fork();
-		if (pid < 0)
-			return ;
-		if (!pid)
+		if (!ft_no_fork(cmd, shell))
 		{
-			ft_child_process(cmd, env, shell);
-			exit(EXIT_FAILURE);
+			pid = fork();
+			if (pid < 0)
+				return ;
+			if (!pid)
+			{
+				ft_child_process(cmd, env, shell);
+				exit(EXIT_FAILURE);
+			}
 		}
 		cmd = cmd->next;
 	}

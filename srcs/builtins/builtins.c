@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:21:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 15:45:46 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:03:30 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ int	ft_is_builtin(char *arg)
 		|| !ft_strcmp(arg, "exit"))
 		return (1);
 	return (0);
+}
+
+int	ft_is_builtin_no_fork(char *arg)
+{
+	if (!ft_strcmp(arg, "cd") || !ft_strcmp(arg, "export")
+		|| !ft_strcmp(arg, "unset") || !ft_strcmp(arg, "exit"))
+		return (1);
+	return (0);
+}
+
+int	ft_no_fork(t_cmd *cmd, t_shell *shell)
+{
+	if (!(cmd->args && ft_is_builtin_no_fork(cmd->args[0])))
+		return (0);
+	ft_exec_builtins(cmd, shell);
+	return (1);
 }
 
 void	ft_exec_builtins(t_cmd *cmd, t_shell *shell)
