@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:03:15 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 09:50:43 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:17:57 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_shell
 {
 	t_cmd	*cmds;
 	t_env	*env;
-	char	**path;
+	char	*line;
 	int		exit_status;
 }	t_shell;
 

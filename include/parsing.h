@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:10:14 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 09:33:23 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:10:26 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ t_token	*ft_sort_token(t_token *token);
 int		ft_open_infile(char *filename, t_cmd *cmd);
 int		ft_open_outfile(char *filename, t_cmd *cmd, t_token_type type);
 void	ft_open_pipe(t_cmd *cmd, t_shell *shell);
+void	ft_heredoc(char *limiter, t_cmd *cmd, t_token *token, t_shell *shell);
 
 #endif

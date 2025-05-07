@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:18:43 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/06 19:00:17 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:38:14 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,10 @@ t_token	*ft_tokeniser(char *line, t_shell *shell)
 	while (i < len && ft_isspace(line[i]))
 		i++;
 	while (i < len)
+	{
 		ft_switch_token(line, &i, &token, shell);
-	//add pipe dernier token
+		while (i < len && ft_isspace(line[i]))
+			i++;
+	}
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:52:59 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/06 18:57:06 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:28:31 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	ft_link_token(t_token **tab_token, int len, t_token *last_token)
 	t_token	*cur_token;
 	int		i;
 
+	if (len == 0)
+		return ;
 	i = 0;
 	while (i < len - 1)
 	{
@@ -70,13 +72,12 @@ t_token	*ft_sort_token(t_token *token)
 	if (!token)
 		return (NULL);
 	ft_token_info(token, tab_info);
+	if (tab_info[0] == 0)
+		return (token);
 	tab_token = malloc(sizeof(t_token *) * tab_info[0]);
 	len = tab_info[0];
-	while (len > 0)
-	{
-		len -= 1;
+	while (len-- > 0)
 		tab_token[len] = NULL;
-	}
 	while (token && token->type != TOKEN_PIPE)
 	{
 		ft_place_token(token, tab_token, tab_info);

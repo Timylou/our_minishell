@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 22:47:10 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 09:32:51 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:19:16 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,22 @@ t_cmd	*ft_init_cmd(void)
 	return (cmd);
 }
 
-static int	ft_manage_token(t_token **token, t_cmd *cmd, t_shell *shell)
+static int	ft_manage_token(t_token **tkn, t_cmd *cmd, t_token *a, t_shell *s)
 {
 	int	success;
 
 	success = 1;
-	if ((*token)->type == TOKEN_REDIR_IN)
-		success = ft_open_infile((*token)->value, cmd);
-	else if ((*token)->type == TOKEN_REDIR_OUT
-		|| (*token)->type == TOKEN_REDIR_APPEND)
-		success = ft_open_outfile((*token)->value, cmd, (*token)->type);
-	else if ((*token)->type == TOKEN_WORD)
-		success = ft_open_cmd(token, cmd, shell);
-	else if ((*token)->type == TOKEN_PIPE)
-		ft_open_pipe(cmd, shell);
+	if ((*tkn)->type == TOKEN_REDIR_IN)
+		success = ft_open_infile((*tkn)->value, cmd);
+	else if ((*tkn)->type == TOKEN_REDIR_OUT
+		|| (*tkn)->type == TOKEN_REDIR_APPEND)
+		success = ft_open_outfile((*tkn)->value, cmd, (*tkn)->type);
+	else if ((*tkn)->type == TOKEN_WORD)
+		success = ft_open_cmd(tkn, cmd, s);
+	else if ((*tkn)->type == TOKEN_PIPE)
+		ft_open_pipe(cmd, s);
+	else if ((*tkn)->type == TOKEN_HEREDOC)
+		ft_heredoc((*tkn)->value, cmd, a, s);
 	return (success);
 }
 
@@ -62,6 +64,7 @@ void	ft_parse(char *line, t_shell *shell)
 	t_token	*all_token;
 	t_cmd	*cmd;
 
+	shell->line = line;
 	all_token = ft_tokeniser(line, shell);
 	token = ft_sort_token(all_token);
 	all_token = token;
@@ -71,7 +74,7 @@ void	ft_parse(char *line, t_shell *shell)
 	shell->cmds = cmd;
 	while (token)
 	{
-		if (!ft_manage_token(&token, cmd, shell))
+		if (!ft_manage_token(&token, cmd, all_token, shell))
 			break ;
 		if (token->type == TOKEN_PIPE)
 			cmd = cmd->next;
