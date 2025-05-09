@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:21:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/07 10:39:26 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:04:20 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ void	ft_exec_builtins(t_cmd *cmd, t_shell *shell)
 		shell->exit_status = ft_pwd_builtins(cmd);
 	else if (!ft_strcmp(cmd->args[0], "env"))
 		shell->exit_status = ft_env_builtins(cmd, shell->env);
+	else if (!ft_strcmp(cmd->args[0], "exit"))
+		ft_exit_builtins(cmd, shell);
 }
