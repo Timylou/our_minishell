@@ -6,7 +6,7 @@
 #    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/07 12:47:01 by yel-mens         ###   ########.fr        #
+#    Updated: 2025/05/09 12:07:48 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/builtins/pwd.c $(DIR_SRCS)/builtins/cd.c		\
 					$(DIR_SRCS)/builtins/cd_path.c								\
 					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/shell.c		\
+					$(DIR_SRCS)/structs/history.c								\
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/heredoc.c	\
 					$(DIR_SRCS)/parsing/sort_token.c $(DIR_SRCS)/parsing/cmd.c	\

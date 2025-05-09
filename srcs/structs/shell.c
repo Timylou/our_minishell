@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:13:11 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 13:18:40 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/09 12:10:38 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_shell	*init_shell(char **env)
 		exit(EXIT_MALLOC);
 	}
 	shell->cmds = NULL;
+	shell->history = NULL;
 	shell->env = NULL;
-	shell->line = NULL;
 	ft_init_env(env, shell);
 	return (shell);
 }

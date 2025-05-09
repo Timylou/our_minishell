@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 22:47:10 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 13:19:16 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/09 12:27:13 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_parse(char *line, t_shell *shell)
 	t_token	*all_token;
 	t_cmd	*cmd;
 
-	shell->line = line;
 	all_token = ft_tokeniser(line, shell);
 	token = ft_sort_token(all_token);
 	all_token = token;

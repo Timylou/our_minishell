@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:45:12 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 13:21:17 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/09 12:10:15 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	ft_free_shell(t_shell *shell)
 			ft_free_cmds(shell->cmds);
 		if (shell->env)
 			ft_free_env(shell->env);
-		if (shell->line)
-			free(shell->line);
+		if (shell->history)
+			ft_free_history(shell->history);
 		free(shell);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:03:15 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 13:17:57 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/09 12:14:28 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,18 @@ typedef struct s_env
 	struct s_env	*prev;
 }	t_env;
 
+typedef struct s_hist
+{
+	char			*line;
+	struct s_hist	*next;
+	struct s_hist	*prev;
+}	t_hist;
+
 typedef struct s_shell
 {
 	t_cmd	*cmds;
 	t_env	*env;
-	char	*line;
+	t_hist	*history;
 	int		exit_status;
 }	t_shell;
 
@@ -57,6 +64,12 @@ void	ft_unset_env(t_env *to_delete, t_shell *shell);
 
 t_cmd	*ft_init_cmd(void);
 
+/* * * * * * *
+*  history *
+* * * * * * **/
+
+void	ft_init_history(char *line, t_shell *shell);
+
 /* * * *  * 
 *  free *
 * * * * * */
@@ -65,6 +78,7 @@ void	ft_free_array(char **array);
 void	ft_free_env(t_env *env);
 void	ft_error(char *msg, int exit_code, t_shell *shell);
 void	ft_free_cmds(t_cmd *cmds);
+void	ft_free_history(t_hist *history);
 void	ft_free_shell(t_shell *shell);
 
 #endif
