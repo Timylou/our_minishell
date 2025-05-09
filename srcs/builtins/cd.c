@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:57:58 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 14:31:35 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:28:47 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_cd_home(t_shell *shell)
 {
 	char	*home;
 	char	*oldpwd;
-	char	cwd[PATH_MAX]; 
+	char	cwd[PATH_MAX];
 
 	home = ft_get_val("HOME", shell);
 	if (!home)

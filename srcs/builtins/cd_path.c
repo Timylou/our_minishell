@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:12:28 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 17:43:31 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:29:26 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_check_access(char *arg, char *pwd)
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		free(pwd);
-		return(1);
+		return (1);
 	}
 	return (0);
 }
@@ -47,7 +47,7 @@ static int	check_directory(char *arg)
 int	ft_cd_path(char *arg, t_shell *shell)
 {
 	char	cwd[PATH_MAX];
-	char		*pwd;
+	char	*pwd;
 
 	pwd = ft_get_val("PWD", shell);
 	if (ft_check_access(arg, pwd))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:40:32 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/05 10:02:58 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:27:30 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_echo_builtins(t_cmd *cmd)
 
 	i = 1;
 	newline = 1;
-	if (!cmd || !cmd->args|| !cmd->args[0])
+	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
 	while (cmd->args[i] && !ft_is_newline(cmd->args[i]))
 	{

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:00:01 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/05 16:43:19 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:28:12 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_val(char *var, t_shell *shell) //returns the value "/home/directory"
+//returns the value "/home/directory"
+char	*ft_get_val(char *var, t_shell *shell)
 {
 	t_env	*env;
 	char	*sep;
