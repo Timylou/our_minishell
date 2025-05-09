@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:13:11 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/03 10:35:32 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:10:21 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_shell	*init_shell(char **env)
 	}
 	shell->cmds = NULL;
 	shell->env = NULL;
+	shell->exit_status = 0;
 	ft_init_env(env, shell);
 	return (shell);
 }

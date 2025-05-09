@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/07 10:04:17 by yel-mens         ###   ########.fr        #
+#    Updated: 2025/05/09 13:07:59 by brturcio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/builtins/builtins.c $(DIR_SRCS)/builtins/echo.c	\
 					$(DIR_SRCS)/builtins/env_utils.c $(DIR_SRCS)/builtins/env.c	\
 					$(DIR_SRCS)/builtins/pwd.c $(DIR_SRCS)/builtins/cd.c		\
-					$(DIR_SRCS)/builtins/cd_path.c								\
+					$(DIR_SRCS)/builtins/cd_path.c $(DIR_SRCS)/builtins/exit.c\
 					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/shell.c		\
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/cmd.c		\
