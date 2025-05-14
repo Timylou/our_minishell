@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:37:00 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/13 14:24:52 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:05:30 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,16 @@ int	ft_compare_nom(char *str1, char *str2)
 	int		i;
 
 	i = 0;
-	while (str1[i] && str1[i] != '=' && str2[i] &&str2[i] != '=')
+	while (str1[i] && str1[i] != '=' && str2[i] && str2[i] != '=')
 	{
 		if (str1[i] != str2[i])
 			return (str1[i] - str2[i]);
 		i++;
 	}
-	return (0);
+	if ((str1[i] == '=' || str1[i] == '\0') && \
+(str2[i] == '=' || str2[i] == '\0'))
+		return 0;
+	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }
 
 void	ft_sort_env_copy(t_env *head)

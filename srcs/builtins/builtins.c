@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:21:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/12 14:12:53 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:20:13 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void	ft_exec_builtins(t_cmd *cmd, t_shell *shell)
 	else if (!ft_strcmp(cmd->args[0], "exit"))
 		ft_exit_builtins(cmd, shell);
 	else if (!ft_strcmp(cmd->args[0], "export"))
-		 ft_export_builtins(shell);
+		ft_export_builtins(shell);
 }
