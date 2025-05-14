@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/09 17:24:20 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:50:38 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
-	printbanner();
+	// printbanner();
 	shell = init_shell(env);
 	while (shell)
 	{

@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:37:00 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/12 14:33:00 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:24:52 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,39 @@ t_env	*ft_cread_env_copy(t_env *env)
 	return (env_copy);
 }
 
+int	ft_compare_nom(char *str1, char *str2)
+{
+	int		i;
+
+	i = 0;
+	while (str1[i] && str1[i] != '=' && str2[i] &&str2[i] != '=')
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_sort_env_copy(t_env *head)
 {
 	t_env	*current;
 	char	*tmp;
-	int		swapped;
+	int		swap;
 
-	if (!head)
-		return ;
-	swapped = 1;
-	while (swapped)
+	swap = 1;
+	while (swap)
 	{
-		swapped = 0;
+		swap = 0;
 		current = head;
 		while (current && current->next)
 		{
-			if (ft_strcmp(current->data, current->next->data) > 0)
+			if (ft_compare_nom(current->data, current->next->data) > 0)
 			{
 				tmp = current->data;
 				current->data = current->next->data;
 				current->next->data = tmp;
-				swapped = 1;
+				swap = 1;
 			}
 			current = current->next;
 		}

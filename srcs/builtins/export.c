@@ -6,31 +6,51 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:17:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/12 14:53:06 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:56:24 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	ft_print_valor(t_env *tmp)
+{
+	int	i;
 
+	i = 0;
+	ft_putstr_fd("declare -x ", STDOUT_FILENO);
+	while(tmp->data[i] && tmp->data[i] != '=')
+	{
+		write (1, &tmp->data[i], 1);
+		i++;
+	}
+	if (tmp->data[i] == '=')
+	{
+		i++;
+		ft_putstr_fd("=\"", STDOUT_FILENO);
+		while(tmp->data[i])
+		{
+			write (1, &tmp->data[i], 1);
+			i++;
+		}
+		ft_putendl_fd("\"", STDOUT_FILENO);
+	}
+}
 static int	ft_printf_export(t_env *env)
 {
 	t_env	*env_copy;
 	t_env	*tmp;
-
 
 	env_copy = ft_cread_env_copy(env);
 	if (!env_copy)
 		return (1);
 	ft_sort_env_copy(env_copy);
 	tmp = env_copy;
-	while (env_copy)
+	while (tmp)
 	{
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putendl_fd(env_copy->data, STDOUT_FILENO);
-		env_copy = env_copy->next;
+		ft_print_valor(tmp);
+		tmp = tmp->next;
 	}
-	ft_free_env(tmp);
+	ft_free_env(env_copy);
 	return (0);
 }
 
@@ -38,6 +58,11 @@ int	ft_export_builtins(t_shell *shell)
 {
 	if (!shell->cmds->args[1])
 		ft_printf_export(shell->env);
+	// else if (shell->cmds->args[1])
+
+	/*si args[1] y si la variable existe y el argumento tiene =
+	entonces tengo que actualizar el valor de la variable
+	y si no existe entonces tengo que crearla y marcarla como exportada*/
 	return (0);
 }
 
