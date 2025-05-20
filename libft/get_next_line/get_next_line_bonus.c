@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 09:42:38 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/05 15:18:28 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/15 20:22:14 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*extract_line(char **data)
 		len++;
 	if ((*data)[len] == '\n')
 	{
-		line = ft_substr(*data, 0, len + 1);
+		line = ft_substr2(*data, 0, len + 1);
 		after_newline = ft_strdup_(*data + len + 1);
 		free(*data);
 		*data = after_newline;

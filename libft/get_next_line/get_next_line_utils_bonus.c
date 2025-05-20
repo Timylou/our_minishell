@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 09:42:44 by brturcio          #+#    #+#             */
-/*   Updated: 2025/04/15 09:49:22 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/15 20:21:40 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_strdup_(char *s)
 	return (str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr2(char const *s, unsigned int start, size_t len)
 {
 	unsigned int	i;
 	unsigned int	j;

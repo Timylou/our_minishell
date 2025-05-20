@@ -6,7 +6,7 @@
 #    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/14 15:31:53 by brturcio         ###   ########.fr        #
+#    Updated: 2025/05/20 17:08:01 by brturcio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/builtins/export.c $(DIR_SRCS)/builtins/export_utils.c\
 					$(DIR_SRCS)/builtins/export_utils2.c \
 					$(DIR_SRCS)/builtins/cd_path.c $(DIR_SRCS)/builtins/exit.c	\
-					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/shell.c		\
+					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/env_utils.c\
+					$(DIR_SRCS)/structs/shell.c		\
 					$(DIR_SRCS)/structs/history.c								\
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/heredoc.c	\

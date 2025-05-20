@@ -6,35 +6,11 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:17:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/14 17:37:01 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:45:45 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_print_valor(t_env *tmp)
-{
-	int	i;
-
-	i = 0;
-	ft_putstr_fd("declare -x ", STDOUT_FILENO);
-	while (tmp->data[i] && tmp->data[i] != '=')
-	{
-		write (1, &tmp->data[i], 1);
-		i++;
-	}
-	if (tmp->data[i] == '=')
-	{
-		i++;
-		ft_putstr_fd("=\"", STDOUT_FILENO);
-		while (tmp->data[i])
-		{
-			write (1, &tmp->data[i], 1);
-			i++;
-		}
-		ft_putendl_fd("\"", STDOUT_FILENO);
-	}
-}
 
 static int	ft_printf_export(t_env *env)
 {
@@ -48,37 +24,88 @@ static int	ft_printf_export(t_env *env)
 	tmp = env_copy;
 	while (tmp)
 	{
-		ft_print_valor(tmp);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(tmp->var, STDOUT_FILENO);
+		if (ft_strchr(tmp->data, '='))
+		{
+			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd(tmp->value, STDOUT_FILENO);
+			ft_putstr_fd("\"", STDOUT_FILENO);
+		}
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		tmp = tmp->next;
 	}
 	ft_free_env(env_copy);
 	return (0);
 }
 
+int	ft_concat_env(char *var, char *value, t_env *node)
+{
+	char	*joined;
+	char	*new_data;
 
+	if (!node || !value || !node->value)
+		return (1);
+	joined = ft_strjoin(node->value, value);
+	if (!joined)
+		return (1);
+	new_data = build_new_env(var, joined);
+	free(joined);
+	if (!new_data)
+		return (1);
+	free(node->data);
+	free(node->value);
+	free(node->var);
+	node->data = new_data;
+	node->var = ft_extract_var(new_data);
+	node->value = ft_extract_value(new_data);
+	return (0);
+}
+
+static int	ft_export_with_arg(t_shell *shell, char **args)
+{
+	int		equal;
+	t_env	*new_env;
+	char	*var;
+	char	*value;
+
+	equal = ft_check_equal(args[1]);
+	var = ft_extract_var(args[1]);
+	value = ft_extract_value(args[1]);
+	if (!var || !value)
+		return (1);
+	new_env = ft_var_exists(shell->env, var);
+	if (new_env)
+	{
+		if (equal == 1)
+			ft_update_env(var, value, shell);
+		else if (equal == 2)
+			ft_concat_env(var, value, new_env);
+	}
+	else
+	{
+		if (equal)
+			ft_append_env(build_new_env(var, value), shell);
+		else
+			ft_append_env(ft_strdup(var), shell);
+	}
+	free(var);
+	free(value);
+	return (0);
+}
 
 int	ft_export_builtins(t_shell *shell)
 {
-	int	equal;
-
 	if (!shell->cmds->args[1])
-		ft_printf_export(shell->env);
-	if (shell->cmds->args[1])
+		return (ft_printf_export(shell->env));
+	if (ft_parsing_export_arg(shell->cmds->args[1]) || \
+		(shell->cmds->args[1] && shell->cmds->args[2]))
 	{
-		if (ft_parsing_export_arg(shell->cmds->args[1]))
-		{
-			ft_export_error_msj(shell->cmds->args[1], \
-"not a valid identifier");
-			return (1);
-		}
-		equal = ft_check_equal(shell->cmds->args[1]);
-		if (ft_var_exists(shell))
-		{
-			ft_printf("exist\n");
-		}
+		ft_export_error_msj(shell->cmds->args[1], \
+		"not a valid identifier");
+		return (1);
 	}
-	/*si args[1] y si la variable existe y el argumento tiene =
-	entonces tengo que actualizar el valor de la variable
-	y si no existe entonces tengo que crearla y marcarla como exportada*/
+	if (ft_export_with_arg(shell, shell->cmds->args))
+		return (1);
 	return (0);
 }

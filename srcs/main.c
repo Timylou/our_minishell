@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/13 11:50:38 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:08:42 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
-	// printbanner();
+	printbanner();
 	shell = init_shell(env);
 	while (shell)
 	{
-		ft_print_prompt(shell);
+		if (isatty(STDIN_FILENO))
+			ft_print_prompt(shell);
 		line = get_next_line(STDIN_FILENO);
 		if (line)
 		{
@@ -57,6 +58,7 @@ int	main(int argc, char **argv, char **env)
 			break ;
 	}
 	ft_free_shell(shell);
-	ft_printf(YELLOW"\nSEE YOU SOON !\n"RST);
+	if (isatty(STDIN_FILENO))
+		ft_printf(YELLOW"\nSEE YOU SOON !\n"RST);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:27:43 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/14 17:36:32 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:23:15 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_export_error_msj(char *arg, char *msj)
 	if (msj)
 		ft_putendl_fd(msj, STDERR_FILENO);
 }
+
 int	ft_parsing_export_arg(char *arg)
 {
 	int	i;
@@ -31,10 +32,10 @@ int	ft_parsing_export_arg(char *arg)
 	if (!ft_isalpha(arg[0]) && (arg[0] != '_'))
 		return (1);
 	while (arg[i] && !(arg[i] == '=' || (arg[i] \
-== '+' && arg[i + 1] == '=')))
+	== '+' && arg[i + 1] == '=')))
 	{
 		if (!ft_isalpha(arg[i]) && !ft_isdigit(arg[i]) \
-&& !(arg[i] == '_'))
+	&& !(arg[i] == '_'))
 			return (1);
 		i++;
 	}
@@ -57,18 +58,16 @@ int	ft_check_equal(char *arg)
 	return (0);
 }
 
-int	ft_var_exists(t_shell *shell)
+t_env	*ft_var_exists(t_env *env, char *arg)
 {
-	char	*arg;
-	t_env	*env;
+	char	*var;
 
-	arg = shell->cmds->args[1];
-	env = shell->env;
+	var = ft_extract_var(arg);
 	while (env)
 	{
-		if (ft_compare_nom(env->data, arg) == 0)
-			return (1);
+		if (ft_strcmp(env->var, var) == 0)
+			return (env);
 		env = env->next;
 	}
-	return (0);
+	return (NULL);
 }

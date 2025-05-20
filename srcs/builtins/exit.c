@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 17:38:56 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/12 11:00:26 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:38:51 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	ft_exit_builtins(t_cmd *cmd, t_shell *shell)
 		return ;
 	size = ft_strlen(cmd->args[1]);
 	if ((cmd->args[1][0] == '-' && (size > 20 || \
-(size == 20 && ft_strcmp(cmd->args[1], "-9223372036854775808") > 0))) \
-|| (cmd->args[1][0] != '-' && (size > 19 || (size == 19 && \
+	(size == 20 && ft_strcmp(cmd->args[1], "-9223372036854775808") > 0))) \
+	|| (cmd->args[1][0] != '-' && (size > 19 || (size == 19 && \
 ft_strcmp(cmd->args[1], "9223372036854775807") > 0))))
 	{
 		ft_exit_error_msj(1, cmd->args[1], "numeric argument required\n");
