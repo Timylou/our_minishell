@@ -3,32 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:00:01 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/09 17:28:12 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:12:02 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//returns the value "/home/directory"
 char	*ft_get_val(char *var, t_shell *shell)
 {
 	t_env	*env;
-	char	*sep;
 
-	env = ft_search_env(var, shell);
+	env = ft_var_exists(shell->env, var);
 	if (!env || !env->data)
 		return (NULL);
-	sep = ft_strchr(env->data, '=');
-	if (!sep || !*(sep + 1))
-		return (NULL);
-	sep = ft_strdup(sep + 1);
-	return (sep);
+	return (ft_strdup(env->value));
 }
 
-static char	*build_new_env(char *var, char *data)
+char	*build_new_env(char *var, char *data)
 {
 	char	*tmp;
 	char	*result;
@@ -41,24 +35,28 @@ static char	*build_new_env(char *var, char *data)
 	return (result);
 }
 
-char	*ft_update_env(char *var, char *data, t_shell *shell) // update value
+char	*ft_update_env(char *var, char *data, t_shell *shell)
 {
 	t_env	*env;
 	char	*new_data;
 
-	env = ft_search_env(var, shell);
+	env = ft_var_exists(shell->env, var);
 	if (!env)
 	{
 		new_data = build_new_env(var, data);
 		if (!new_data)
 			return (NULL);
-		ft_append_env(new_data, shell);
+		ft_append_env(ft_strdup(new_data), shell);
 		return (new_data);
 	}
-	free(env->data);
 	new_data = build_new_env(var, data);
 	if (!new_data)
 		return (NULL);
+	free(env->data);
+	free(env->value);
+	free(env->var);
 	env->data = new_data;
+	env->var = ft_extract_var(new_data);
+	env->value = ft_extract_value(new_data);
 	return (env->data);
 }

@@ -6,22 +6,28 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:37:00 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/14 18:05:30 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:47:17 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_env	*ft_lstnew_env(void *content)
+static t_env	*ft_lstnew_env(t_env *content)
 {
 	t_env	*cont;
 
 	cont = malloc(sizeof(t_env));
 	if (!cont)
 		return (NULL);
-	cont->data = ft_strdup(content);
+	cont->data = ft_strdup(content->data);
 	if (!cont->data)
+	{
+		free(cont);
 		return (NULL);
+	}
+	cont->var = ft_extract_var(cont->data);
+	cont->value = ft_extract_value(cont->data);
+	cont->exporte = content->exporte;
 	cont->next = NULL;
 	cont->prev = NULL;
 	return (cont);
@@ -52,7 +58,7 @@ t_env	*ft_cread_env_copy(t_env *env)
 	new_nodo = NULL;
 	while (env)
 	{
-		new_nodo = ft_lstnew_env(env->data);
+		new_nodo = ft_lstnew_env(env);
 		if (!new_nodo)
 		{
 			ft_free_env(env_copy);
@@ -64,27 +70,28 @@ t_env	*ft_cread_env_copy(t_env *env)
 	return (env_copy);
 }
 
-int	ft_compare_nom(char *str1, char *str2)
+void	ft_swap_env_content(t_env *a, t_env *b)
 {
-	int		i;
+	char	*tmp;
+	int		tmp_exporte;
 
-	i = 0;
-	while (str1[i] && str1[i] != '=' && str2[i] && str2[i] != '=')
-	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
-	}
-	if ((str1[i] == '=' || str1[i] == '\0') && \
-(str2[i] == '=' || str2[i] == '\0'))
-		return 0;
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	tmp = a->data;
+	a->data = b->data;
+	b->data = tmp;
+	tmp = a->var;
+	a->var = b->var;
+	b->var = tmp;
+	tmp = a->value;
+	a->value = b->value;
+	b->value = tmp;
+	tmp_exporte = a->exporte;
+	a->exporte = b->exporte;
+	b->exporte = tmp_exporte;
 }
 
 void	ft_sort_env_copy(t_env *head)
 {
 	t_env	*current;
-	char	*tmp;
 	int		swap;
 
 	swap = 1;
@@ -94,11 +101,9 @@ void	ft_sort_env_copy(t_env *head)
 		current = head;
 		while (current && current->next)
 		{
-			if (ft_compare_nom(current->data, current->next->data) > 0)
+			if (ft_strcmp(current->var, current->next->var) > 0)
 			{
-				tmp = current->data;
-				current->data = current->next->data;
-				current->next->data = tmp;
+				ft_swap_env_content(current, current->next);
 				swap = 1;
 			}
 			current = current->next;

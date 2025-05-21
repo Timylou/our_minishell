@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/20 09:57:49 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/22 01:19:20 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_print_prompt(t_shell *shell)
 	t_env	*hostname;
 	t_env	*pwd;
 
+	if (!isatty(STDIN_FILENO))
+		return ;
 	logname = ft_search_env("LOGNAME", shell);
 	hostname = ft_search_env("NAME", shell);
 	pwd = ft_search_env("PWD", shell);
@@ -32,6 +34,15 @@ void	ft_print_prompt(t_shell *shell)
 	write(1, "$\t", 2);
 }
 
+static void ft_handle_line(char *line, char **env, t_shell *shell)
+{
+	ft_init_history(line, shell);
+	ft_parse(line, shell);
+	ft_process(env, shell);
+	while (wait(NULL) != -1)
+		;
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	*shell;
@@ -44,19 +55,14 @@ int	main(int argc, char **argv, char **env)
 	while (shell)
 	{
 		ft_print_prompt(shell);
-		line = ft_readline(shell);
+		line = get_next_line(STDIN_FILENO);
 		if (line)
-		{
-			ft_init_history(line, shell);
-			ft_parse(line, shell);
-			ft_process(env, shell);
-			while (wait(NULL) != -1)
-				;
-		}
+			ft_handle_line(line, env, shell);
 		else
 			break ;
 	}
 	ft_free_shell(shell);
-	ft_printf(YELLOW"SEE YOU SOON !\n"RST);
+	if (isatty(STDIN_FILENO))
+		ft_printf(YELLOW"\nSEE YOU SOON !\n"RST);
 	return (EXIT_SUCCESS);
 }

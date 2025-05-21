@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 15:42:29 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/03 12:47:34 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:25:34 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_unset_env(t_env *to_delete, t_shell *shell)
 			to_delete->next->prev = to_delete->prev;
 	}
 	free(to_delete->data);
+	free(to_delete->var);
+	free(to_delete->value);
 	free(to_delete);
 }
 
@@ -72,6 +74,9 @@ void	ft_append_env(char *data, t_shell *shell)
 	if (!var_env)
 		ft_error("new env var malloc error", EXIT_MALLOC, shell);
 	var_env->data = data;
+	var_env->var = ft_extract_var(data);
+	var_env->value = ft_extract_value(data);
+	var_env->exporte = NOT_EXPORTE;
 	var_env->next = NULL;
 	var_env->prev = NULL;
 	if (!shell->env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:03:15 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/09 12:14:28 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/15 20:19:02 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ typedef struct s_cmd
 typedef struct s_env
 {
 	char			*data;
+	char			*var;
+	char			*value;
+	int				exporte;
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
@@ -49,6 +52,13 @@ typedef struct s_shell
 
 t_shell	*init_shell(char **env);
 
+/* * * * * * *
+*  env _util *
+* * * * * * */
+
+char	*ft_extract_value(char *data);
+char	*ft_extract_var(char *data);
+
 /* * * * *
 *  env *
 * * * * */
@@ -70,7 +80,7 @@ t_cmd	*ft_init_cmd(void);
 
 void	ft_init_history(char *line, t_shell *shell);
 
-/* * * *  * 
+/* * * *  *
 *  free *
 * * * * * */
 
