@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
+#    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/14 15:31:53 by brturcio         ###   ########.fr        #
+#    Updated: 2025/05/20 09:40:00 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/heredoc.c	\
 					$(DIR_SRCS)/parsing/sort_token.c $(DIR_SRCS)/parsing/cmd.c	\
-					$(DIR_SRCS)/exec/exec.c
+					$(DIR_SRCS)/exec/exec.c										\
+					$(DIR_SRCS)/readline/readline.c $(DIR_SRCS)/readline/switch.c
+
 
 					#$(wildcard $(DIR_SRCS)/builtins/*.c)
 					#$(wildcard $(DIR_SRCS)/*.c)

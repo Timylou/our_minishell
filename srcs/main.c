@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/13 11:50:38 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:57:49 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_print_prompt(t_shell *shell)
+void	ft_print_prompt(t_shell *shell)
 {
 	t_env	*logname;
 	t_env	*hostname;
@@ -39,12 +39,12 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
-	// printbanner();
+	printbanner();
 	shell = init_shell(env);
 	while (shell)
 	{
 		ft_print_prompt(shell);
-		line = get_next_line(STDIN_FILENO);
+		line = ft_readline(shell);
 		if (line)
 		{
 			ft_init_history(line, shell);
@@ -57,6 +57,6 @@ int	main(int argc, char **argv, char **env)
 			break ;
 	}
 	ft_free_shell(shell);
-	ft_printf(YELLOW"\nSEE YOU SOON !\n"RST);
+	ft_printf(YELLOW"SEE YOU SOON !\n"RST);
 	return (EXIT_SUCCESS);
 }

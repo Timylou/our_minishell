@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:10:14 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/07 13:10:26 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:43:32 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef struct s_token
 	char			*value;
 	struct s_token	*next;
 }				t_token;
+
+
+/* * * * * * *
+*  readline *
+* * * * * * * */
+
+int		ft_switch_seq(unsigned char seq[4], char **line, t_shell *shell);
 
 /* * * * * *
 * parser *

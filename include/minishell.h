@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:47:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/07 10:00:50 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:57:47 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <termios.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 
@@ -40,8 +41,11 @@
 # define WHITE	"\033[0;37m"
 # define RST	"\033[0m"
 
-void	printbanner(void);
+# define MAX_LINE_LEN 1024
 
+void	printbanner(void);
+void	ft_print_prompt(t_shell *shell);
+char    *ft_readline(t_shell *shell);
 void	ft_process(char **env, t_shell *shell);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:17:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/14 17:37:01 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/15 13:42:39 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_export_builtins(t_shell *shell)
 {
 	int	equal;
 
+	(void) equal;
 	if (!shell->cmds->args[1])
 		ft_printf_export(shell->env);
 	if (shell->cmds->args[1])
