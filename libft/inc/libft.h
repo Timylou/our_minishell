@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:51:36 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/06 15:03:07 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/05/22 01:27:07 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "ft_printf.h"
-# include "get_next_line.h"
-# include "get_next_line_bonus.h"
 
 typedef struct s_list
 {

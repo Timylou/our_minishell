@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:10:14 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/05/20 09:43:32 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:34:05 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_switch_seq(unsigned char seq[4], char **line, t_shell *shell);
 * parser *
 * * * * * */
 
-void	ft_parse(char *line, t_shell *shell);
+int		ft_parse(char *line, t_shell *shell);
 int		ft_open_cmd(t_token	**token, t_cmd *cmd, t_shell *shell);
 
 /* * * * * * *
@@ -51,6 +51,8 @@ int		ft_open_cmd(t_token	**token, t_cmd *cmd, t_shell *shell);
 
 t_token	*ft_tokeniser(char *line, t_shell *shell);
 t_token	*ft_sort_token(t_token *token);
+char	*ft_get_next_word(char *line, int *i);
+void	ft_free_token(t_token *token);
 
 /* * * * *
 * file *

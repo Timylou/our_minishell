@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/22 01:19:20 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:32:21 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	ft_print_prompt(t_shell *shell)
 static void ft_handle_line(char *line, char **env, t_shell *shell)
 {
 	ft_init_history(line, shell);
-	ft_parse(line, shell);
-	ft_process(env, shell);
+	if (ft_parse(line, shell))
+		ft_process(env, shell);
 	while (wait(NULL) != -1)
 		;
 }
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **env)
 	while (shell)
 	{
 		ft_print_prompt(shell);
-		line = get_next_line(STDIN_FILENO);
+		line = ft_readline(shell);
 		if (line)
 			ft_handle_line(line, env, shell);
 		else

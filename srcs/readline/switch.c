@@ -12,6 +12,25 @@
 
 #include "minishell.h"
 
+static int	ft_is_history(unsigned char seq[4], t_shell *shell)
+{
+	if (!shell->history)
+		return (0);
+	if (seq[2] == 'A')
+	{
+		if (!shell->history->next)
+			return (0);
+		shell->history = shell->history->next;
+	}
+	else if (seq[2] == 'B')
+	{
+		if (!shell->history->prev)
+			return (0);
+		shell->history = shell->history->prev;
+	}
+	return (1);
+}
+
 static int	ft_manage_arrows(unsigned char seq[4], char **line, t_shell *shell)
 {
 	char	*new_line;
@@ -21,18 +40,15 @@ static int	ft_manage_arrows(unsigned char seq[4], char **line, t_shell *shell)
 		return (-1);
 	if (seq[1] == '[')
 	{
-		if (seq[2] == 'A')
-			shell->history = shell->history->next;
-		else if (seq[2] == 'B')
-			shell->history = shell->history->prev;
-		else
+		if(!ft_is_history(seq, shell))
 			return (1);
 		new_line = ft_strdup(shell->history->line);
-		free(*line);
+		if (*line)
+			free(*line);
 		*line = new_line;
-		printf("\r\033[K");
+		ft_printf("\r\033[K");
 		ft_print_prompt(shell);
-		ft_printf("%s", line);
+		ft_printf("%s", *line);
 	}
 	return (1);
 }
@@ -55,7 +71,7 @@ static int  ft_backspace(char *line)
 static int  ft_ctrl_D(char **line)
 {
 	if (!*line)
-		return (-1
+		return (-1);
 	if (!*line[0])
 	{
 		free(*line);
@@ -67,7 +83,7 @@ static int  ft_ctrl_D(char **line)
 
 int	ft_switch_seq(unsigned char seq[4], char **line, t_shell *shell)
 {
-	if (seq[0] == 0x1b)
+	if (seq[0] == 27)
 		return (ft_manage_arrows(seq, line, shell));
 	if (seq[0] == 127)
 		return (ft_backspace(*line));

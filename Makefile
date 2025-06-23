@@ -6,7 +6,7 @@
 #    By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/05/22 01:19:42 by yel-mens         ###   ########.fr        #
+#    Updated: 2025/06/20 20:19:39 by yel-mens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,17 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/builtins/builtins.c $(DIR_SRCS)/builtins/echo.c	\
 					$(DIR_SRCS)/builtins/env_utils.c $(DIR_SRCS)/builtins/env.c	\
 					$(DIR_SRCS)/builtins/pwd.c $(DIR_SRCS)/builtins/cd.c		\
-					$(DIR_SRCS)/builtins/export.c $(DIR_SRCS)/builtins/export_utils.c\
-					$(DIR_SRCS)/builtins/export_utils2.c \
+					$(DIR_SRCS)/builtins/export.c								\
+					$(DIR_SRCS)/builtins/export_utils.c							\
+					$(DIR_SRCS)/builtins/export_utils2.c 						\
 					$(DIR_SRCS)/builtins/cd_path.c $(DIR_SRCS)/builtins/exit.c	\
-					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/env_utils.c\
-					$(DIR_SRCS)/structs/shell.c		\
+					$(DIR_SRCS)/structs/env.c $(DIR_SRCS)/structs/env_utils.c	\
+					$(DIR_SRCS)/structs/shell.c									\
 					$(DIR_SRCS)/structs/history.c								\
 					$(DIR_SRCS)/parsing/parse.c $(DIR_SRCS)/parsing/token.c		\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/heredoc.c	\
 					$(DIR_SRCS)/parsing/sort_token.c $(DIR_SRCS)/parsing/cmd.c	\
+					$(DIR_SRCS)/parsing/quotes.c								\
 					$(DIR_SRCS)/exec/exec.c										\
 					$(DIR_SRCS)/readline/readline.c $(DIR_SRCS)/readline/switch.c
 
