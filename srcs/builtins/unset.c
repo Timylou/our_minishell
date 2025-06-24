@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 12:13:11 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/24 13:37:14 by brturcio         ###   ########.fr       */
+/*   Created: 2025/06/10 17:36:08 by brturcio          #+#    #+#             */
+/*   Updated: 2025/06/13 07:22:31 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell	*init_shell(char **env)
+int	ft_unset_builtins(t_shell *shell)
 {
-	t_shell	*shell;
+	char	**args;
+	t_env	*env_to_delete;
+	int		i;
 
-	shell = malloc(sizeof(t_shell));
-	if (!shell)
+	args = shell->cmds->args;
+	i = 1;
+	while (args[i])
 	{
-		perror("shell malloc");
-		exit(EXIT_MALLOC);
+		env_to_delete = ft_find_env(shell, args[i]);
+		if (!env_to_delete)
+		{
+			i++;
+			continue ;
+		}
+		if (env_to_delete)
+			ft_unset_env(env_to_delete, shell);
+		i++;
 	}
-	shell->cmds = NULL;
-	shell->history = NULL;
-	shell->env = NULL;
-	shell->pids = NULL;
-	shell->nb_cmds = 0;
-	shell->exit_status = EXIT_SUCCESS;
-	ft_init_env(env, shell);
-	return (shell);
+	return (0);
 }

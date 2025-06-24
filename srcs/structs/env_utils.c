@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:22:00 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/20 11:52:08 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/24 13:34:44 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_extract_value(char *data)
 	tmp = sep + 1;
 	len = ft_strlen(tmp);
 	if (len >= 2 && ((tmp[0] == '"' && tmp[len - 1] == '"') \
-	|| (tmp[0] == '\'' && tmp[len - 1] == '\'')))
+|| (tmp[0] == '\'' && tmp[len - 1] == '\'')))
 		value = ft_substr(tmp, 1, len - 2);
 	else
 		value = ft_strdup(tmp);

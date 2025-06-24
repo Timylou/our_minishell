@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:27:43 by brturcio          #+#    #+#             */
-/*   Updated: 2025/05/20 11:23:15 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/24 13:17:43 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	ft_parsing_export_arg(char *arg)
 	if (!ft_isalpha(arg[0]) && (arg[0] != '_'))
 		return (1);
 	while (arg[i] && !(arg[i] == '=' || (arg[i] \
-	== '+' && arg[i + 1] == '=')))
+== '+' && arg[i + 1] == '=')))
 	{
 		if (!ft_isalpha(arg[i]) && !ft_isdigit(arg[i]) \
-	&& !(arg[i] == '_'))
+&& !(arg[i] == '_'))
 			return (1);
 		i++;
 	}
@@ -63,6 +63,24 @@ t_env	*ft_var_exists(t_env *env, char *arg)
 	char	*var;
 
 	var = ft_extract_var(arg);
+	while (env)
+	{
+		if (ft_strcmp(env->var, var) == 0)
+		{
+			free(var);
+			return (env);
+		}
+		env = env->next;
+	}
+	free(var);
+	return (NULL);
+}
+
+t_env	*ft_find_env(t_shell *shell, char *var)
+{
+	t_env	*env;
+
+	env = shell->env;
 	while (env)
 	{
 		if (ft_strcmp(env->var, var) == 0)

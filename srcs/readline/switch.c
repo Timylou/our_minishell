@@ -68,7 +68,7 @@ static int  ft_backspace(char *line)
 	return (1);
 }
 
-static int  ft_ctrl_D(char **line)
+static int	ft_ctrl_d(char **line)
 {
 	if (!*line)
 		return (-1);
@@ -88,6 +88,6 @@ int	ft_switch_seq(unsigned char seq[4], char **line, t_shell *shell)
 	if (seq[0] == 127)
 		return (ft_backspace(*line));
 	if (seq[0] == 4)
-		return (ft_ctrl_D(line));
+		return (ft_ctrl_d(line));
 	return (0);
 }
