@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"initializer_list": "c",
-		"stat.h": "c"
+		"stat.h": "c",
+		"unistd.h": "c"
 	}
 }

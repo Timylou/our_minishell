@@ -6,7 +6,7 @@
 #    By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 07:16:59 by brturcio          #+#    #+#              #
-#    Updated: 2025/06/24 13:00:47 by brturcio         ###   ########.fr        #
+#    Updated: 2025/06/24 14:41:08 by brturcio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/builtins/builtins.c $(DIR_SRCS)/builtins/echo.c	\
 					$(DIR_SRCS)/builtins/env_utils.c $(DIR_SRCS)/builtins/env.c	\
 					$(DIR_SRCS)/builtins/pwd.c $(DIR_SRCS)/builtins/cd.c		\
-					$(DIR_SRCS)/builtins/export.c								\
+					$(DIR_SRCS)/builtins/export.c $(DIR_SRCS)/builtins/unset.c	\
 					$(DIR_SRCS)/builtins/export_utils.c							\
 					$(DIR_SRCS)/builtins/export_utils2.c 						\
 					$(DIR_SRCS)/builtins/cd_path.c $(DIR_SRCS)/builtins/exit.c	\
@@ -34,8 +34,9 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					$(DIR_SRCS)/parsing/file.c $(DIR_SRCS)/parsing/heredoc.c	\
 					$(DIR_SRCS)/parsing/sort_token.c $(DIR_SRCS)/parsing/cmd.c	\
 					$(DIR_SRCS)/parsing/quotes.c								\
-					$(DIR_SRCS)/exec/exec.c										\
-					$(DIR_SRCS)/readline/readline.c $(DIR_SRCS)/readline/switch.c
+					$(DIR_SRCS)/exec/exec.c	 $(DIR_SRCS)/exec/exec_util.c	\
+					$(DIR_SRCS)/readline/readline.c $(DIR_SRCS)/readline/switch.c \
+					$(DIR_SRCS)/signals/signal.c $(DIR_SRCS)/signals/signal_control.c
 
 
 					#$(wildcard $(DIR_SRCS)/builtins/*.c)
@@ -43,6 +44,8 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					#$(wildcard $(DIR_SRCS)/structs/*.c)
 					# Add other folders below if needed (e.g., parser, utils, etc.)
 					# SRCS := $(shell find $(DIR_SRCS) -type f -name "*.c")
+
+LIBS := -lreadline -lhistory -lncurses
 
 # Object files: convert each source file path into a corresponding .o path in objs/
 # For example: srcs/builtins/echo.c → objs/builtins/echo.o
@@ -62,7 +65,7 @@ $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c
 
 # Link all object files with libft to produce the final executable
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@ $(LIBS)
 	@echo "✅ Compilation completed: $(NAME)"
 
 # Build libft only if libft.a does not already exist
