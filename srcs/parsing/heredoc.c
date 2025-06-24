@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:23:25 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/13 07:12:41 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:11:07 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,55 +82,19 @@ static void	ft_read_stdin(int end[2], char *limiter, t_token *a, t_shell *shl)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_heredoc_continuation(t_shell *shell, pid_t pid, \
-struct termios *original_config, int *end)
-{
-	int	status;
-
-	close(end[1]);
-	ft_signals_ign();
-	waitpid(pid, &status, 0);
-	tcsetattr(STDIN_FILENO, TCSANOW, original_config);
-	ft_control_signals_main();
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
-	{
-		shell->exit_status = 130;
-		shell->cmds->in = -1;
-		close(end[0]);
-	}
-	else if (WIFEXITED(status) && WEXITSTATUS(status) == EXIT_FAILURE)
-	{
-		ft_printf("\nminishell: warning: here-document delimited "\
-"by end-of-file (wanted 'delimiter')\n");
-		shell->cmds->in = end[0];
-	}
-	else
-		shell->cmds->in = end[0];
-}
-
 void	ft_heredoc(char *limiter, t_cmd *cmd, t_token *alltkn, t_shell *shell)
 {
-	pid_t			pid;
-	int				end[2];
-	struct termios	original_config;
-	struct termios	heredoc_config;
+	pid_t	pid;
+	int		end[2];
 
-	(void)cmd;
-	tcgetattr(STDIN_FILENO, &original_config);
-	heredoc_config = original_config;
-	heredoc_config.c_lflag &= ~ECHOCTL;
-	tcsetattr(STDIN_FILENO, TCSANOW, &heredoc_config);
 	if (pipe(end) < 0)
 		ft_error("Cannot open pipe in heredoc", EXIT_FD, shell);
 	pid = fork();
 	if (pid < 0)
 		ft_error("fork in heredoc failed", EXIT_FD, shell);
-	if (pid == 0)
-	{
-		close(end[0]);
-		ft_control_signals_heredoc();
+	if (!pid)
 		ft_read_stdin(end, limiter, alltkn, shell);
-		exit(EXIT_SUCCESS);
-	}
-	ft_heredoc_continuation(shell, pid, &original_config, end);
+	close(end[1]);
+	waitpid(pid, NULL, 0);
+	cmd->in = end[0];
 }

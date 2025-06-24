@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:29:08 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/24 11:37:54 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:29:08 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char *ft_dup_from_line(int begin, int end, char *line)
 		else if (line[begin] == '"' && !sg_quote)
 			db_quote = (db_quote + 1) % 2;
 		else if (line[begin] == '$' && !sg_quote)
-			i = i + 1 - 1; // ajouter env avec verif de l'espace avant
+			i = i; // ajouter env avec verif de l'espace avant
 		else
 			word[i++] = line[begin];
 		begin++;

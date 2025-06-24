@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:21:39 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/12 22:06:42 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:03:07 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,15 @@ static void	ft_close(t_cmd *all_cmd, t_cmd *cmd)
 	}
 }
 
-void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell)
+static void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell)
 {
-	int	exit_status;
-
-	exit_status = shell->exit_status;
 	ft_close(shell->cmds, cmd);
 	if (!ft_dup_files(cmd))
 	{
 		if (cmd->in < 0)
 		{
 			ft_free_shell(shell);
-			exit(exit_status);
+			exit(EXIT_FD);
 		}
 		ft_free_shell(shell);
 		return ;
@@ -94,30 +91,27 @@ void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell)
 	}
 }
 
-/**
- * @brief Handles the complete execution cycle of commands.
- *
- * This function initializes process handling by:
- * - Counting the number of commands in the list.
- * - Allocating memory for child PIDs.
- * - Forking and executing each command.
- * - Waiting for all children and updating the exit status.
- * - Freeing all commands after execution.
- *
- * @param env The environment variables.
- * @param shell The shell state structure.
- */
 void	ft_process(char **env, t_shell *shell)
 {
-	shell->nb_cmds = ft_count_cmds(shell->cmds);
-	shell->pids = ft_calloc(shell->nb_cmds, sizeof(pid_t));
-	if (!shell->pids)
-		return ;
-	if (!ft_init_process(env, shell))
-		return ;
-	ft_wait_status_child(shell);
-	free(shell->pids);
-	shell->pids = NULL;
+	pid_t	pid;
+	t_cmd	*cmd;
+
+	cmd = shell->cmds;
+	while (cmd)
+	{
+		if (!ft_no_fork(cmd, shell))
+		{
+			pid = fork();
+			if (pid < 0)
+				return ;
+			if (!pid)
+			{
+				ft_child_process(cmd, env, shell);
+				exit(EXIT_FAILURE);
+			}
+		}
+		cmd = cmd->next;
+	}
 	ft_free_cmds(shell->cmds);
 	shell->cmds = NULL;
 }

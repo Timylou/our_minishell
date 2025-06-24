@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:17:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/13 07:21:54 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/05/22 01:20:15 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,25 @@ int	ft_concat_env(char *var, char *value, t_env *node)
 	return (0);
 }
 
-static void	ft_update_or_append_env(t_shell *shell, int equal, \
-char *var, char *value)
+static int	ft_export_with_arg(t_shell *shell, char **args)
 {
-	t_env	*existing;
+	int		equal;
+	t_env	*new_env;
+	char	*var;
+	char	*value;
 
-	existing = ft_var_exists(shell->env, var);
-	if (existing)
+	equal = ft_check_equal(args[1]);
+	var = ft_extract_var(args[1]);
+	value = ft_extract_value(args[1]);
+	if (!var || !value)
+		return (1);
+	new_env = ft_var_exists(shell->env, var);
+	if (new_env)
 	{
 		if (equal == 1)
 			ft_update_env(var, value, shell);
 		else if (equal == 2)
-			ft_concat_env(var, value, existing);
+			ft_concat_env(var, value, new_env);
 	}
 	else
 	{
@@ -82,24 +89,6 @@ char *var, char *value)
 		else
 			ft_append_env(ft_strdup(var), shell);
 	}
-}
-
-static int	ft_export_with_arg(t_shell *shell, char **args)
-{
-	int		equal;
-	char	*var;
-	char	*value;
-
-	equal = ft_check_equal(args[1]);
-	var = ft_extract_var(args[1]);
-	value = ft_extract_value(args[1]);
-	if (!var || !value)
-	{
-		free(var);
-		free(value);
-		return (1);
-	}
-	ft_update_or_append_env(shell, equal, var, value);
 	free(var);
 	free(value);
 	return (0);
@@ -110,10 +99,10 @@ int	ft_export_builtins(t_shell *shell)
 	if (!shell->cmds->args[1])
 		return (ft_printf_export(shell->env));
 	if (ft_parsing_export_arg(shell->cmds->args[1]) || \
-(shell->cmds->args[1] && shell->cmds->args[2]))
+		(shell->cmds->args[1] && shell->cmds->args[2]))
 	{
 		ft_export_error_msj(shell->cmds->args[1], \
-"not a valid identifier");
+		"not a valid identifier");
 		return (1);
 	}
 	if (ft_export_with_arg(shell, shell->cmds->args))
