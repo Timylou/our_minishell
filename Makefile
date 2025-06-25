@@ -45,7 +45,6 @@ SRCS			:=	$(DIR_SRCS)/banner.c $(DIR_SRCS)/main.c $(DIR_SRCS)/free.c	\
 					# Add other folders below if needed (e.g., parser, utils, etc.)
 					# SRCS := $(shell find $(DIR_SRCS) -type f -name "*.c")
 
-LIBS := -lreadline -lhistory -lncurses
 
 # Object files: convert each source file path into a corresponding .o path in objs/
 # For example: srcs/builtins/echo.c → objs/builtins/echo.o
@@ -65,7 +64,7 @@ $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c
 
 # Link all object files with libft to produce the final executable
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@ $(LIBS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@
 	@echo "✅ Compilation completed: $(NAME)"
 
 # Build libft only if libft.a does not already exist

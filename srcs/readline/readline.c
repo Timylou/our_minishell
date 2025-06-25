@@ -76,6 +76,6 @@ char	*ft_readline(t_shell *shell)
 	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 	ft_printf("\n");
 	if (!line && seq[0] == '\n')
-		line = ft_strjoin("\n", "");
+		line = ft_strjoin("\0", "");
 	return (line);
 }

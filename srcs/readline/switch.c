@@ -38,6 +38,13 @@ static int	ft_manage_arrows(unsigned char seq[4], char **line, t_shell *shell)
 	if (read(STDIN_FILENO, &seq[1], 1) != 1
 		|| read(STDIN_FILENO, &seq[2], 1) != 1)
 		return (-1);
+	if (g_signal != NO_SIGNAL)
+	{
+		free(*line);
+		*line = NULL;
+		seq[0] = '\n';
+		return (-1);
+	}
 	if (seq[1] == '[')
 	{
 		if(!ft_is_history(seq, shell))
@@ -83,6 +90,13 @@ static int	ft_ctrl_d(char **line)
 
 int	ft_switch_seq(unsigned char seq[4], char **line, t_shell *shell)
 {
+	if (g_signal != NO_SIGNAL)
+	{
+		free(*line);
+		*line = NULL;
+		seq[0] = '\n';
+		return (-1);
+	}
 	if (seq[0] == 27)
 		return (ft_manage_arrows(seq, line, shell));
 	if (seq[0] == 127)
