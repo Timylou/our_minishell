@@ -47,7 +47,7 @@ static int	ft_manage_arrows(unsigned char seq[4], char **line, t_shell *shell)
 	}
 	if (seq[1] == '[')
 	{
-		if(!ft_is_history(seq, shell))
+		if (!ft_is_history(seq, shell))
 			return (1);
 		new_line = ft_strdup(shell->history->line);
 		if (*line)
@@ -60,9 +60,9 @@ static int	ft_manage_arrows(unsigned char seq[4], char **line, t_shell *shell)
 	return (1);
 }
 
-static int  ft_backspace(char *line)
+static int	ft_backspace(char *line)
 {
-	int len;
+	int	len;
 
 	if (!line)
 		return (1);

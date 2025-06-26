@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 22:47:10 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/24 13:30:26 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:23:37 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*ft_init_cmd(void)
+t_cmd	*ft_init_cmd(t_shell *shell)
 {
 	t_cmd	*cmd;
 
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
-		return (NULL);
+		ft_error("malloc cmd error", EXIT_MALLOC, shell);
 	cmd->args = NULL;
 	cmd->in = STDIN_FILENO;
 	cmd->out = STDOUT_FILENO;
@@ -69,9 +69,7 @@ int	ft_parse(char *line, t_shell *shell)
 		return (0);
 	token = ft_sort_token(all_token);
 	all_token = token;
-	cmd = ft_init_cmd();
-	if (!cmd)
-		ft_error("cmd malloc error", EXIT_MALLOC, shell);
+	cmd = ft_init_cmd(shell);
 	shell->cmds = cmd;
 	while (token)
 	{

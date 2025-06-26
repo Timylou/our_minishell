@@ -12,7 +12,36 @@
 
 #include "minishell.h"
 
-static char *ft_dup_from_line(int begin, int end, char *line)
+static int	ft_isseparator(char c)
+{
+	if (c == 0 || ft_isspace(c) || c == '<' || c == '>' || c == '|')
+		return (1);
+	return (0);
+}
+
+static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
+{
+	char	*tab;
+	t_env	*env;
+	int		i;
+
+	i = *begin + 1;
+	while (!ft_isseparator(line[i]) && line[i] != '\'' && line[i] != '"')
+		i++;
+	tab = ft_substr(line, *begin + 1, i - *begin - 1);
+	*begin = i - 1;
+	env = ft_search_env(tab, shell);
+	free(tab);
+	if (!env)
+		return ;
+	tab = ft_strjoin(*word, env->value);
+	free(*word);
+	*word = malloc((ft_strlen(tab) + ft_strlen(line)) * sizeof(char));
+	ft_strlcpy(*word, tab, ft_strlen(tab) + 1);
+	free(tab);
+}
+
+static char	*ft_dup_from_line(int begin, int end, char *line, t_shell *shell)
 {
 	char	*word;
 	int		i;
@@ -22,22 +51,22 @@ static char *ft_dup_from_line(int begin, int end, char *line)
 	i = 0;
 	sg_quote = 0;
 	db_quote = 0;
-	word = malloc(sizeof(char) * (end - begin) + 1);
-	if (!word)
-		return (NULL);
+	word = ft_calloc((end - begin) + 2, sizeof(char));
 	while (begin < end)
 	{
 		if (line[begin] == '\'' && !db_quote)
 			sg_quote = (sg_quote + 1) % 2;
 		else if (line[begin] == '"' && !sg_quote)
 			db_quote = (db_quote + 1) % 2;
-		else if (line[begin] == '$' && !sg_quote)
-			i = i + 1 - 1; // ajouter env avec verif de l'espace avant
+		else if (line[begin] == '$' && !sg_quote && !ft_isseparator(line[begin + 1]))
+			ft_dollar(line, &begin, &word, shell);
 		else
 			word[i++] = line[begin];
+		while (word[i])
+			i++;
+		word[i + 1] = 0;
 		begin++;
 	}
-	word[i] = 0;
 	return (word);
 }
 
@@ -50,7 +79,7 @@ static int	ft_go_end_word(char *line, int *i)
 	db_quote = 0;
 	while (line[*i])
 	{
-		if ((!sg_quote && !db_quote) && ft_isspace(line[*i]))
+		if ((!sg_quote && !db_quote) && ft_isseparator(line[*i]))
 			return (1);
 		else if (!sg_quote && line[*i] == '"')
 			db_quote = (db_quote + 1) % 2;
@@ -66,7 +95,7 @@ static int	ft_go_end_word(char *line, int *i)
 	return (1);
 }
 
-char	*ft_get_next_word(char *line, int *i)
+char	*ft_get_next_word(char *line, int *i, t_shell *shell)
 {
 	int		begin_word;
 	int		end_word;
@@ -77,5 +106,5 @@ char	*ft_get_next_word(char *line, int *i)
 	if (!ft_go_end_word(line, i))
 		return (NULL);
 	end_word = *i;
-	return (ft_dup_from_line(begin_word, end_word, line));
+	return (ft_dup_from_line(begin_word, end_word, line, shell));
 }

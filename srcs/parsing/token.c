@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:18:43 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/24 13:30:59 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:52:57 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static t_token	*ft_add_token(char *line, int *i, t_token_type t, t_shell *shl)
 	if (token->type == TOKEN_HEREDOC || token->type == TOKEN_REDIR_APPEND)
 		*i += 2;
 	token->next = NULL;
-	token->value = ft_get_next_word(line, i);
+	token->value = ft_get_next_word(line, i, shl);
 	if (!token->value)
 	{
 		free(token);
 		return (NULL);
 	}
-	if (!token->value[0])
+	if (!token->value[0] && token->type != TOKEN_WORD)
 	{
 		free(token->value);
 		free(token);

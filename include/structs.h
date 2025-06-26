@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:03:15 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/24 13:08:51 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:22:56 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		ft_unset_env(t_env *to_delete, t_shell *shell);
 * cmd *
 * * * * */
 
-t_cmd	*ft_init_cmd(void);
+t_cmd	*ft_init_cmd(t_shell *shell);
 
 /* * * * * * *
 *  history *
