@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:32:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/25 06:45:52 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:22:26 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_handler_heredoc(int signal)
 {
 	(void)signal;
 	write(STDOUT_FILENO, "^C\n", 3);
-	exit(EXIT_SIGINT);
+	g_signal = MAIN_SIGINT;
 }
 
 void	ft_wait_status_child_continution(t_shell *shell, \

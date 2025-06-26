@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:23:25 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/25 18:45:33 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:34:25 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*ft_read_line(int fd)
 	while (buffer[0] != '\n')
 	{
 		res = read(fd, buffer, 1);
-		if (res <= 0 || res == EOF)
+		if (res <= 0 || res == EOF || g_signal == MAIN_SIGINT)
 		{
 			free(line);
 			return (NULL);
@@ -59,7 +59,6 @@ static void	ft_read_stdin(int end[2], char *limiter, t_token *a, t_shell *shl)
 	char	*line;
 	int		len_line;
 
-	close(end[0]);
 	write(1, "here_doc> ", 10);
 	line = ft_read_line(STDIN_FILENO);
 	while (line)
@@ -79,6 +78,8 @@ static void	ft_read_stdin(int end[2], char *limiter, t_token *a, t_shell *shl)
 	}
 	close(end[1]);
 	ft_free_shell_and_token(a, shl);
+	if (g_signal == MAIN_SIGINT)
+		exit(EXIT_SIGINT);
 	exit(EXIT_FAILURE);
 }
 
@@ -119,6 +120,7 @@ void	ft_heredoc(char *limiter, t_cmd *cmd, t_token *alltkn, t_shell *shell)
 	tcgetattr(STDIN_FILENO, &original_config);
 	heredoc_config = original_config;
 	heredoc_config.c_lflag &= ~ECHOCTL;
+	heredoc_config.c_lflag |= ISIG;
 	tcsetattr(STDIN_FILENO, TCSANOW, &heredoc_config);
 	if (pipe(end) < 0)
 		ft_error("Cannot open pipe in heredoc", EXIT_FD, shell);

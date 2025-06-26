@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	ft_isseparator(char c)
+static int	ft_issep(char c)
 {
 	if (c == 0 || ft_isspace(c) || c == '<' || c == '>' || c == '|')
 		return (1);
@@ -26,7 +26,7 @@ static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
 	int		i;
 
 	i = *begin + 1;
-	while (!ft_isseparator(line[i]) && line[i] != '\'' && line[i] != '"')
+	while (!ft_issep(line[i]) && line[i] != '\'' && line[i] != '"')
 		i++;
 	tab = ft_substr(line, *begin + 1, i - *begin - 1);
 	*begin = i - 1;
@@ -58,7 +58,7 @@ static char	*ft_dup_from_line(int begin, int end, char *line, t_shell *shell)
 			sg_quote = (sg_quote + 1) % 2;
 		else if (line[begin] == '"' && !sg_quote)
 			db_quote = (db_quote + 1) % 2;
-		else if (line[begin] == '$' && !sg_quote && !ft_isseparator(line[begin + 1]))
+		else if (line[begin] == '$' && !sg_quote && !ft_issep(line[begin + 1]))
 			ft_dollar(line, &begin, &word, shell);
 		else
 			word[i++] = line[begin];
@@ -79,7 +79,7 @@ static int	ft_go_end_word(char *line, int *i)
 	db_quote = 0;
 	while (line[*i])
 	{
-		if ((!sg_quote && !db_quote) && ft_isseparator(line[*i]))
+		if ((!sg_quote && !db_quote) && ft_issep(line[*i]))
 			return (1);
 		else if (!sg_quote && line[*i] == '"')
 			db_quote = (db_quote + 1) % 2;
