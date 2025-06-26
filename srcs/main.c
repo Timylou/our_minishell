@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/25 06:34:23 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/26 19:47:55 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,9 @@ static int	continue_main(char **env, t_shell *shell)
 {
 	char	*line;
 
-	// prompt = ft_print_prompt(shell);
 	ft_control_signals_main();
 	ft_print_prompt(shell);
 	line = ft_readline(shell);
-	// free(prompt);
 	ft_update_exit_status_by_signal(shell);
 	if (!line)
 		return (1);
