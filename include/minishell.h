@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:47:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/25 05:52:50 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:20:53 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_print_prompt(t_shell *shell);
 char	*ft_readline(t_shell *shell);
 void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell);
 void	ft_process(char **env, t_shell *shell);
-int		ft_init_process(char **env, t_shell *shell);
+int		ft_init_process(char **env, t_shell *shell, int i);
 int		ft_count_cmds(t_cmd *cmds);
 
 #endif

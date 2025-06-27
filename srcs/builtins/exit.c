@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 17:38:56 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/24 13:15:21 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:59:05 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void	ft_exit_error_msj(int exit, char *arg, char *msj)
 {
 	(void)exit;
-	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+	if (isatty(STDIN_FILENO))
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 	if (arg)
 	{
 		ft_putstr_fd(arg, STDERR_FILENO);

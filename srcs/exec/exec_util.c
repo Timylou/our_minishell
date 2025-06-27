@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_util.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:25:01 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/06 17:09:02 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:20:27 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,33 @@
  * @param shell The shell state structure.
  * @return 1 on success, 0 on failure.
  */
-int	ft_init_process(char **env, t_shell *shell)
+int    ft_init_process(char **env, t_shell *shell, int i)
 {
-	int		i;
-	t_cmd	*cmd;
+    t_cmd    *cmd;
 
-	i = 0;
-	cmd = shell->cmds;
-	while (cmd)
-	{
-		if (!ft_no_fork(cmd, shell))
-		{
-			shell->pids[i] = fork();
-			if (shell->pids[i] < 0)
-				return (1);
-			if (!shell->pids[i])
-			{
-				ft_control_signals_child();
-				ft_child_process(cmd, env, shell);
-				exit(EXIT_FAILURE);
-			}
-			i++;
-		}
-		cmd = cmd->next;
-	}
-	return (1);
+    cmd = shell->cmds;
+    while (cmd)
+    {
+        if (!ft_no_fork(cmd, shell))
+        {
+            shell->pids[i] = fork();
+            if (shell->pids[i] < 0)
+                return (1);
+            if (!shell->pids[i])
+            {
+                ft_control_signals_child();
+                ft_child_process(cmd, env, shell);
+                exit(EXIT_FAILURE);
+            }
+            if (cmd->out != STDOUT_FILENO)
+                close(cmd->out);
+            if (cmd->in != STDIN_FILENO)
+                close(cmd->in);
+            i++;
+        }
+        cmd = cmd->next;
+    }
+    return (1);
 }
 
 /**

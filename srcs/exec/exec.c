@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:21:39 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/24 13:21:31 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:20:45 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_process(char **env, t_shell *shell)
 	shell->pids = ft_calloc(shell->nb_cmds, sizeof(pid_t));
 	if (!shell->pids)
 		return ;
-	if (!ft_init_process(env, shell))
+	if (!ft_init_process(env, shell, 0))
 		return ;
 	ft_wait_status_child(shell);
 	free(shell->pids);

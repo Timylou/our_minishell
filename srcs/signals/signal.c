@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:32:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/27 14:46:15 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:47:47 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void	ft_wait_status_child(t_shell *shell)
 void	ft_update_exit_status_by_signal(t_shell *shell)
 {
 	if (g_signal == MAIN_SIGINT)
-		shell->exit_status = 130;
+		shell->exit_status = EXIT_SIGINT;
 	g_signal = NO_SIGNAL;
 }

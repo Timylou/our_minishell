@@ -36,6 +36,7 @@ static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
 		tab = ft_substr(line, *begin + 1, i - *begin - 1);
 		env = ft_search_env(tab, shell);
 		free(tab);
+		*begin = i - 1;
 		if (!env)
 			return ;
 		tab = ft_strjoin(*word, env->value);
@@ -44,7 +45,6 @@ static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
 	*word = malloc((ft_strlen(tab) + ft_strlen(line)) * sizeof(char));
 	ft_strlcpy(*word, tab, ft_strlen(tab) + 1);
 	free(tab);
-	*begin = i - 1;
 }
 
 static char	*ft_dup_from_line(int begin, int end, char *line, t_shell *shell)
