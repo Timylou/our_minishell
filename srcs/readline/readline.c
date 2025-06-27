@@ -88,11 +88,13 @@ char	*ft_readline(t_shell *shell)
 		if (!swtch)
 		{
 			line = ft_join_to_line(seq, line, shell);
-			ft_printf("%s", seq);
+			if (isatty(STDIN_FILENO)) // interactive mode
+				ft_printf("%s", seq);
 		}
 		ft_bzero(seq, sizeof(seq));
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-	ft_printf("\n");
+	if (isatty(STDIN_FILENO)) // interactive mode
+		ft_printf("\n");
 	return (ft_free_line(line, seq));
 }

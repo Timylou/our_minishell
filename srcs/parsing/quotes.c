@@ -19,14 +19,51 @@ static int	ft_issep(char c)
 	return (0);
 }
 
+// static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
+// {
+// 	char	*tab;
+// 	t_env	*env;
+// 	int		i;
+
+// 	i = *begin + 1;
+// 	while (!ft_issep(line[i]) && line[i] != '\'' && line[i] != '"')
+// 		i++;
+// 	tab = ft_substr(line, *begin + 1, i - *begin - 1);
+// 	*begin = i - 1;
+// 	env = ft_search_env(tab, shell);
+// 	free(tab);
+// 	if (!env)
+// 		return ;
+// 	tab = ft_strjoin(*word, env->value);
+// 	free(*word);
+// 	*word = malloc((ft_strlen(tab) + ft_strlen(line)) * sizeof(char));
+// 	ft_strlcpy(*word, tab, ft_strlen(tab) + 1);
+// 	free(tab);
+// }
+
+// Ceci est juste une copie pour ne pas abîmer la fonction originale au cas où je la casserais.
 static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
 {
 	char	*tab;
 	t_env	*env;
 	int		i;
 
+	// Cette partie est provisoire, pour pouvoir voir le statut de sortie dans minishell
+	// avec la commande echo $?. Je sais que ça dépasse les 25 lignes,
+	// mais pour le moment je la laisse comme ça.
+	// Quand on fera l’appel ensemble, tu pourras me dire comment ou où placer cette partie.
+	if (line[*begin + 1] == '?')
+	{
+		tab = ft_itoa(shell->exit_status); // convertir le statut de sortie en chaîne de caractères
+		char *tmp = ft_strjoin(*word, tab); // concatène à la chaîne de caractères en cours
+		free(*word);
+		*word = tmp;
+		free(tab);
+		*begin += 1; // avance l’index après le ‘?’
+		return ;
+	}
 	i = *begin + 1;
-	while (!ft_issep(line[i]) && line[i] != '\'' && line[i] != '"')
+	while (!ft_issep(line[i]) && line[i] != '\'' && line[i] != '"' && line[i])
 		i++;
 	tab = ft_substr(line, *begin + 1, i - *begin - 1);
 	*begin = i - 1;

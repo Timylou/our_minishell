@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/26 19:47:55 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/27 08:16:31 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,14 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
-	printbanner();
+	// printbanner();
 	shell = init_shell(env);
 	while (shell)
 	{
 		if (continue_main(env, shell))
 		{
-			write (STDOUT_FILENO, "exit\n", 5);
+			if (isatty(STDIN_FILENO))  // interactive mode
+				write (STDOUT_FILENO, "exit\n", 5);
 			break ;
 		}
 	}
