@@ -56,16 +56,11 @@ static char	*ft_free_line(char *line, unsigned char seq[4])
 {
 	if (g_signal != NO_SIGNAL)
 	{
-		if (line && line[0])
-		{
+		if (line)
 			free(line);
-			return (ft_strjoin("\0", ""));
-		}
-		if (line && !line[0])
-			free(line);
-		return (NULL);
+		return (ft_strjoin("\0", ""));
 	}
-	if ((!line && seq[0] == '\n'))
+	if (!line && seq[0] == '\n')
 		return (ft_strjoin("\0", ""));
 	return (line);
 }
@@ -88,13 +83,11 @@ char	*ft_readline(t_shell *shell)
 		if (!swtch)
 		{
 			line = ft_join_to_line(seq, line, shell);
-			if (isatty(STDIN_FILENO)) // interactive mode
-				ft_printf("%s", seq);
+			ft_printf("%s", seq);
 		}
 		ft_bzero(seq, sizeof(seq));
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-	if (isatty(STDIN_FILENO)) // interactive mode
-		ft_printf("\n");
+	ft_printf("\n");
 	return (ft_free_line(line, seq));
 }

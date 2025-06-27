@@ -3,40 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/27 08:16:31 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:50:40 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 volatile sig_atomic_t	g_signal = NO_SIGNAL;
-
-// char	*ft_print_prompt(t_shell *shell)
-// {
-// 	char	*prompt;
-// 	t_env	*logname;
-// 	char	*tmp;
-// 	char	pwd[BUFSIZ];
-
-// 	if (!getcwd(pwd, sizeof(pwd)))
-// 		return (ft_strdup(HGRN"minishell $> "RST));
-// 	logname = ft_find_env(shell, "LOGNAME");
-// 	if (!logname)
-// 		logname->value = "user";
-// 	prompt = ft_strjoin(HGRN, logname->value);
-// 	prompt = ft_strjoin_free(prompt, ":");
-// 	prompt = ft_strjoin_free(prompt, RST);
-// 	tmp = ft_strjoin(prompt, HMAG);
-// 	free(prompt);
-// 	prompt = tmp;
-// 	prompt = ft_strjoin_free(prompt, pwd);
-// 	prompt = ft_strjoin_free(prompt, RST);
-// 	prompt = ft_strjoin_free(prompt, "$> ");
-// 	return (prompt);
-// }
 
 void	ft_print_prompt(t_shell *shell)
 {
@@ -96,8 +72,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (continue_main(env, shell))
 		{
-			if (isatty(STDIN_FILENO))  // interactive mode
-				write (STDOUT_FILENO, "exit\n", 5);
+			ft_printf("exit\n");
 			break ;
 		}
 	}

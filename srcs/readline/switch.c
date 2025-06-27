@@ -41,7 +41,7 @@ static int	ft_manage_arrows(unsigned char seq[4], char **line, t_shell *shell)
 		free(*line);
 		*line = NULL;
 		return (-1);
-	}	
+	}
 	if (seq[1] == '[')
 	{
 		if (!shell->history)

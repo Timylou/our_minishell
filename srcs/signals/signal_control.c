@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 16:12:14 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/26 19:58:34 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:48:00 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	ft_control_signals_main(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
-    ft_memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = ft_sigint_handler;
-    sa.sa_flags = 0;
-    sigemptyset(&sa.sa_mask);
-    sigaction(SIGINT, &sa, NULL);
-	//signal(SIGINT, ft_sigint_handler);
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = ft_sigint_handler;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
 }
 
@@ -34,14 +33,13 @@ void	ft_control_signals_child(void)
 
 void	ft_control_signals_heredoc(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
-    ft_memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = ft_handler_heredoc;
-    sa.sa_flags = 0;
-    sigemptyset(&sa.sa_mask);
-    sigaction(SIGINT, &sa, NULL);
-	//signal(SIGINT, ft_handler_heredoc);
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = ft_handler_heredoc;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
 }
 

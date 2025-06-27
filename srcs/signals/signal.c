@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:32:34 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/27 08:16:02 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:46:15 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_sigint_handler(int signal)
 {
 	(void)signal;
 	g_signal = MAIN_SIGINT;
-	write(STDOUT_FILENO, "^C", 2);  // pour afficher ^C
+	write(STDOUT_FILENO, "^C", 2);
 }
 
 void	ft_handler_heredoc(int signal)
