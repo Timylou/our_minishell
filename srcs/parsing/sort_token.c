@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:52:59 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/28 16:39:50 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:46:12 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	ft_check_token(t_token *token)
 	is_cmd = 0;
 	while (token)
 	{
-		if (token->type == TOKEN_WORD)
+		if (token->type != TOKEN_PIPE)
 			is_cmd = 1;
 		if (((token->type == TOKEN_HEREDOC || token->type == TOKEN_REDIR_APPEND
 			|| token->type == TOKEN_REDIR_IN || token->type == TOKEN_REDIR_OUT)

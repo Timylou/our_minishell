@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:23:25 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/26 19:52:39 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:29:16 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	ft_read_stdin(int end[2], char *limiter, t_token *a, t_shell *shl)
 	char	*line;
 	int		len_line;
 
-	write(1, "here_doc> ", 10);
+	ft_printf("here_doc> ");
 	line = ft_read_line(STDIN_FILENO);
 	while (line)
 	{
@@ -72,7 +72,7 @@ static void	ft_read_stdin(int end[2], char *limiter, t_token *a, t_shell *shl)
 			exit(EXIT_SUCCESS);
 		}
 		write(end[1], line, len_line + 1);
-		write(1, "here_doc> ", 10);
+		ft_printf("here_doc> ");
 		free(line);
 		line = ft_read_line(STDIN_FILENO);
 	}

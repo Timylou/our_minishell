@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:21:39 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/27 17:20:45 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:39:00 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell)
 	if (!ft_exec(cmd, env, shell))
 	{
 		ft_free_shell(shell);
-		exit(EXIT_CANNOT_EXECUTE);
+		exit(EXIT_CMD_NOT_FOUND);
 	}
 }
 

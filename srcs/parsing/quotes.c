@@ -34,13 +34,14 @@ static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
 	else
 	{
 		tab = ft_substr(line, *begin + 1, i - *begin - 1);
+		*begin = i - 1;
 		env = ft_search_env(tab, shell);
 		free(tab);
-		*begin = i - 1;
 		if (!env)
 			return ;
 		tab = ft_strjoin(*word, env->value);
 	}
+	*begin = i - 1;
 	free(*word);
 	*word = malloc((ft_strlen(tab) + ft_strlen(line)) * sizeof(char));
 	ft_strlcpy(*word, tab, ft_strlen(tab) + 1);
