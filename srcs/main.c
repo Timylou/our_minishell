@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/27 14:50:40 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/28 16:42:03 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static int	continue_main(char **env, t_shell *shell)
 	ft_init_history(line, shell);
 	if (ft_parse(line, shell))
 		ft_process(env, shell);
+	else
+		shell->exit_status = EXIT_SYNTAX_ERROR;
 	while (wait(NULL) != -1)
 		;
 	return (0);
