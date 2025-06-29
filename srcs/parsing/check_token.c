@@ -16,7 +16,7 @@ static int	ft_check_wrong_token(t_token *token, int is_cmd)
 {
 	return (((token->type != TOKEN_WORD && token->type != TOKEN_PIPE)
 			&& (!token->value || !token->value[0]))
-			|| (token->type == TOKEN_PIPE && is_cmd == 0));
+		|| (token->type == TOKEN_PIPE && is_cmd == 0));
 }
 
 static t_token	*ft_free_null_token(t_token *token, t_token **all_token)
@@ -45,7 +45,7 @@ static t_token	*ft_free_null_token(t_token *token, t_token **all_token)
 int	ft_check_token(t_token **all_token)
 {
 	t_token	*token;
-	int 	is_cmd;
+	int		is_cmd;
 
 	token = *all_token;
 	is_cmd = 0;

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static char *ft_search_exit_status(char *word, t_shell *shell)
+static char	*ft_search_exit_status(char *word, t_shell *shell)
 {
 	char	*tab;
 	char	*temp;

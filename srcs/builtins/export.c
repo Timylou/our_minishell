@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:17:11 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/24 13:21:02 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/29 13:34:39 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ char *var, char *value)
 	}
 }
 
-static int	ft_export_with_arg(t_shell *shell, char **args)
+int	ft_export_with_arg(t_shell *shell, char *arg)
 {
 	int		equal;
 	char	*var;
 	char	*value;
 
-	equal = ft_check_equal(args[1]);
-	var = ft_extract_var(args[1]);
-	value = ft_extract_value(args[1]);
+	equal = ft_check_equal(arg);
+	var = ft_extract_var(arg);
+	value = ft_extract_value(arg);
 	if (!var || !value)
 	{
 		free(var);
@@ -107,16 +107,25 @@ static int	ft_export_with_arg(t_shell *shell, char **args)
 
 int	ft_export_builtins(t_shell *shell)
 {
-	if (!shell->cmds->args[1])
+	char	**args;
+	int		i;
+	int		ret;
+
+	args = shell->cmds->args;
+	ret = 0;
+	if (!args[1])
 		return (ft_printf_export(shell->env));
-	if (ft_parsing_export_arg(shell->cmds->args[1]) || \
-(shell->cmds->args[1] && shell->cmds->args[2]))
+	i = 1;
+	while (args[i])
 	{
-		ft_export_error_msj(shell->cmds->args[1], \
-"not a valid identifier");
-		return (1);
+		if (ft_parsing_export_arg(args[i]))
+		{
+			ft_export_error_msj(args[i], "not a valid identifier");
+			ret = 1;
+		}
+		else if (ft_export_with_arg(shell, args[i]))
+			ret = 1;
+		i++;
 	}
-	if (ft_export_with_arg(shell, shell->cmds->args))
-		return (1);
-	return (0);
+	return (ret);
 }
