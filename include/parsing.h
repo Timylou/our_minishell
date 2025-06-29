@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:10:14 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/28 16:37:03 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/29 10:57:56 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int		ft_open_cmd(t_token	**token, t_cmd *cmd, t_shell *shell);
 t_token	*ft_tokeniser(char *line, t_shell *shell);
 t_token	*ft_sort_token(t_token *token);
 char	*ft_get_next_word(char *line, int *i, t_shell *shell);
-int		ft_check_token(t_token *token);
+void	ft_dollar(char *line, int *begin, char **word, t_shell *shell);
+int		ft_check_token(t_token **token);
 void	ft_free_token(t_token *token);
 
 /* * * * *

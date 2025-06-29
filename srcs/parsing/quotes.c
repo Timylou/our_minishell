@@ -19,33 +19,10 @@ static int	ft_issep(char c)
 	return (0);
 }
 
-static void	ft_dollar(char *line, int *begin, char **word, t_shell *shell)
+static int	ft_dollar_check(char *line, int sg_quote, int begin)
 {
-	char	*tab;
-	t_env	*env;
-	int		i;
-
-	i = *begin + 1;
-	while (!ft_issep(line[i])
-		&& line[i] != '\'' && line[i] != '"' && line[i] != '?')
-		i++;
-	if (line[*begin + 1] == '?' && ++i)
-		tab = ft_itoa(shell->exit_status);
-	else
-	{
-		tab = ft_substr(line, *begin + 1, i - *begin - 1);
-		*begin = i - 1;
-		env = ft_search_env(tab, shell);
-		free(tab);
-		if (!env)
-			return ;
-		tab = ft_strjoin(*word, env->value);
-	}
-	*begin = i - 1;
-	free(*word);
-	*word = malloc((ft_strlen(tab) + ft_strlen(line)) * sizeof(char));
-	ft_strlcpy(*word, tab, ft_strlen(tab) + 1);
-	free(tab);
+	return (line[begin] == '$' && !sg_quote && !ft_issep(line[begin + 1])
+		&& line[begin + 1] != '"' && line[begin + 1] != '\'');
 }
 
 static char	*ft_dup_from_line(int begin, int end, char *line, t_shell *shell)
@@ -65,7 +42,7 @@ static char	*ft_dup_from_line(int begin, int end, char *line, t_shell *shell)
 			sg_quote = (sg_quote + 1) % 2;
 		else if (line[begin] == '"' && !sg_quote)
 			db_quote = (db_quote + 1) % 2;
-		else if (line[begin] == '$' && !sg_quote && !ft_issep(line[begin + 1]))
+		else if (ft_dollar_check(line, sg_quote, begin))
 			ft_dollar(line, &begin, &word, shell);
 		else
 			word[i++] = line[begin];

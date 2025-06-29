@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:52:59 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/28 17:46:12 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/29 09:39:05 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,32 +89,4 @@ t_token	*ft_sort_token(t_token *token)
 	token = tab_token[0];
 	free(tab_token);
 	return (token);
-}
-
-int	ft_check_token(t_token *token)
-{
-	t_token	*all_token;
-	int 	is_cmd;
-
-	all_token = token;
-	is_cmd = 0;
-	while (token)
-	{
-		if (token->type != TOKEN_PIPE)
-			is_cmd = 1;
-		if (((token->type == TOKEN_HEREDOC || token->type == TOKEN_REDIR_APPEND
-			|| token->type == TOKEN_REDIR_IN || token->type == TOKEN_REDIR_OUT)
-			&& (!token->value || !token->value[0]))
-			|| (token->type == TOKEN_PIPE && is_cmd == 0))
-		{
-			ft_free_token(all_token);
-			return (0);
-		}
-		if (token->type == TOKEN_PIPE)
-			is_cmd = 0;
-		token = token->next;
-	}
-	if (!is_cmd)
-		ft_free_token(all_token);
-	return (is_cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:21:39 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/28 17:39:00 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/29 11:32:02 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	ft_dup_files(t_cmd *cmd)
 
 static int	ft_exec(t_cmd *cmd, char **env, t_shell *shell)
 {
+	if (!cmd->args && (cmd->in != STDIN_FILENO || cmd->out != STDOUT_FILENO))
+		return (2);
 	if (!cmd->args)
 		return (0);
 	if (ft_is_builtin(cmd->args[0]))
@@ -74,6 +76,7 @@ static void	ft_close(t_cmd *all_cmd, t_cmd *cmd)
 void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell)
 {
 	int	exit_status;
+	int	exec;
 
 	exit_status = shell->exit_status;
 	ft_close(shell->cmds, cmd);
@@ -87,11 +90,12 @@ void	ft_child_process(t_cmd *cmd, char **env, t_shell *shell)
 		ft_free_shell(shell);
 		return ;
 	}
-	if (!ft_exec(cmd, env, shell))
-	{
-		ft_free_shell(shell);
+	exec = ft_exec(cmd, env, shell);
+	ft_free_shell(shell);
+	if (!exec)
 		exit(EXIT_CMD_NOT_FOUND);
-	}
+	if (exec == 2)
+		exit(EXIT_SUCCESS);
 }
 
 /**

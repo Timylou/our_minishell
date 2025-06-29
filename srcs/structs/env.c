@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brturcio <brturcio@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 15:42:29 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/24 13:35:51 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/06/29 10:37:30 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static int	ft_compare(char *var, t_env *current_env, int len)
 	char	*current_var;
 	int		i;
 
-	current_var = current_env->data;
+	current_var = current_env->var;
+	if (len != (int) ft_strlen(current_var))
+		return (0);
 	i = 0;
 	while (i < len)
 	{

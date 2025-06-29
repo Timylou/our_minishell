@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 08:26:31 by brturcio          #+#    #+#             */
-/*   Updated: 2025/06/28 16:42:03 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/29 11:18:58 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
-	// printbanner();
+	printbanner();
 	shell = init_shell(env);
 	while (shell)
 	{

@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 22:47:10 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/06/28 16:36:48 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/06/29 10:06:35 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_parse(char *line, t_shell *shell)
 	if (!all_token)
 		return (0);
 	token = ft_sort_token(all_token);
-	if (!ft_check_token(token))
+	if (!ft_check_token(&token))
 		return (0);
 	all_token = token;
 	cmd = ft_init_cmd(shell);
